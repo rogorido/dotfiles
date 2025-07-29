@@ -1,0 +1,7 @@
+$pdf_mode=4;
+$out_dir = '/home/igor/latexpruebas/outdirs';
+$pdf_viewer = 'atril';
+$pdf_previewer = 'start atril';
+$biber = 'biber --output-safechars %O %S';
+$clean_ext = 'acn acr alg aux bbl bcf blg brf fdb_latexmk glg glo gls idx ilg ind ist lof log lot out run.xml toc dvi bbl rel %R-blx.bib %R.synctex.gz';
+
