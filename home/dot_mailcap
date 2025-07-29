@@ -1,0 +1,108 @@
+video/3gpp;/opt/realplayer/realplay %s
+video/3gpp-encrypted;/opt/realplayer/realplay %s
+audio/3gpp;/opt/realplayer/realplay %s
+audio/3gpp-encrypted;/opt/realplayer/realplay %s
+audio/x-rn-3gpp-amr;/opt/realplayer/realplay %s
+audio/x-rn-3gpp-amr-encrypted;/opt/realplayer/realplay %s
+audio/x-rn-3gpp-amr-wb;/opt/realplayer/realplay %s
+audio/x-rn-3gpp-amr-wb-encrypted;/opt/realplayer/realplay %s
+video/3gpp2;/opt/realplayer/realplay %s
+audio/3gpp2;/opt/realplayer/realplay %s
+video/x-3gpp2;/opt/realplayer/realplay %s
+audio/x-3gpp2;/opt/realplayer/realplay %s
+audio/aac;/opt/realplayer/realplay %s
+audio/m4a;/opt/realplayer/realplay %s
+audio/x-m4a;/opt/realplayer/realplay %s
+audio/aiff;/opt/realplayer/realplay %s
+audio/x-pn-aiff;/opt/realplayer/realplay %s
+audio/x-aiff;/opt/realplayer/realplay %s
+audio/x-aiffc;/opt/realplayer/realplay %s
+audio/amr;/opt/realplayer/realplay %s
+audio/amr-encrypted;/opt/realplayer/realplay %s
+audio/amr-wb;/opt/realplayer/realplay %s
+audio/amr-wb-encrypted;/opt/realplayer/realplay %s
+audio/basic;/opt/realplayer/realplay %s
+audio/x-pn-au;/opt/realplayer/realplay %s
+video/H261;/opt/realplayer/realplay %s
+video/H263;/opt/realplayer/realplay %s
+video/H263-1998;/opt/realplayer/realplay %s
+video/H263-2000;/opt/realplayer/realplay %s
+audio/mp1;/opt/realplayer/realplay %s
+audio/x-mp1;/opt/realplayer/realplay %s
+audio/mp2;/opt/realplayer/realplay %s
+audio/x-mp2;/opt/realplayer/realplay %s
+audio/mp3;/opt/realplayer/realplay %s
+audio/x-mp3;/opt/realplayer/realplay %s
+audio/mpegurl;/opt/realplayer/realplay %s
+audio/x-mpegurl;/opt/realplayer/realplay %s
+audio/scpls;/opt/realplayer/realplay %s
+audio/x-scpls;/opt/realplayer/realplay %s
+audio/mpeg;/opt/realplayer/realplay %s
+audio/mpg;/opt/realplayer/realplay %s
+audio/x-mpeg;/opt/realplayer/realplay %s
+audio/x-mpg;/opt/realplayer/realplay %s
+audio/rn-mpeg;/opt/realplayer/realplay %s
+application/x-ogg;/opt/realplayer/realplay %s
+application/ogg;/opt/realplayer/realplay %s
+application/vnd.rn-realmedia-secure;/opt/realplayer/realplay %s
+application/vnd.rn-realaudio-secure;/opt/realplayer/realplay %s
+audio/x-realaudio-secure;/opt/realplayer/realplay %s
+video/vnd.rn-realvideo-secure;/opt/realplayer/realplay %s
+audio/vnd.rn-realaudio;/opt/realplayer/realplay %s
+audio/x-realvideo;/opt/realplayer/realplay %s
+audio/x-realaudio;/opt/realplayer/realplay %s
+application/vnd.rn-realmedia;/opt/realplayer/realplay %s
+application/vnd.rn-realmedia-vbr;/opt/realplayer/realplay %s
+audio/x-pn-realaudio;/opt/realplayer/realplay %s
+audio/x-pn-realaudio-plugin;/opt/realplayer/realplay %s
+video/vnd.rn-realvideo;/opt/realplayer/realplay %s
+text/vnd.rn-realtext;/opt/realplayer/realplay %s
+image/vnd.rn-realpix;/opt/realplayer/realplay %s
+application/vnd.rn-realsystem-rmj;/opt/realplayer/realplay %s
+application/vnd.rn-realsystem-rmx;/opt/realplayer/realplay %s
+application/vnd.rn-realplayer;/opt/realplayer/realplay %s
+application/smil;/opt/realplayer/realplay %s
+application/x-smil;/opt/realplayer/realplay %s
+application/streamingmedia;/opt/realplayer/realplay %s
+application/x-streamingmedia;/opt/realplayer/realplay %s
+application/sdp;/opt/realplayer/realplay %s
+
+application/pdf;		 /usr/bin/zathura %s
+application/djvu;		 /usr/bin/djview %s
+
+# pongo esto
+text/html; firefox %s ;
+#text/html; w3m -I %{charset} -T text/html -dump %s; nametemplate=%s.html; copiousoutput
+# text/html;  elinks -dump %s; nametemplate=%s.html; copiousoutput
+text/html; w3m -I %{charset} -T text/html -dump; copiousoutput; print = select-browser.pl %s; nametemplate=%s.html
+#hasta ahora tenía estas dos lineas:
+#text/html; w3m %s; nametemplate=%s.html
+#text/html; w3m -I %{charset} -T text/html -dump %s; nametemplate=%s.html; copiousoutput
+
+# This maps all types of video *other than MPEG* to the viewer
+# # 'genericmovie'.
+video/*; ~/Documents/scripts/mutt_bgrun mpv %s
+#image/*; ~/Documents/scripts/mutt_bgrun qiv %s
+image/*; ~/Documents/scripts/mutt_bgrun sxiv %s
+#image/*; display %s
+#
+video/mp4;/usr/bin/mplayer %s
+
+application/ms-word;	~/Documents/scripts/mutt_bgrun /usr/bin/soffice %s
+application/msword;	~/Documents/scripts/mutt_bgrun /usr/bin/soffice %s
+application/x-msexcel;	~/Documents/scripts/mutt_bgrun /usr/bin/soffice %s
+application/x-excel;	~/Documents/scripts/mutt_bgrun /usr/bin/soffice %s
+application/excel;	~/Documents/scripts/mutt_bgrun /usr/bin/soffice %s
+application/vnd.ms-excel;	~/Documents/scripts/mutt_bgrun /usr/bin/soffice %s
+application/powerpoint;		~/Documents/scripts/mutt_bgrun /usr/bin/soffice %s
+application/mspowerpoint;	~/Documents/scripts/mutt_bgrun /usr/bin/soffice %s
+application/vnd.ms-powerpoint;	~/Documents/scripts/mutt_bgrun /usr/bin/soffice %s
+application/vnd.openxmlformats-officedocument.wordprocessingml.document; ~/Documents/scripts/mutt_bgrun /usr/bin/soffice %s
+
+# Open Office Stuff
+application/vnd.oasis.opendocument.chart; ~/Documents/scripts/mutt_bgrun /usr/bin/soffice %s
+application/vnd.oasis.opendocument.spreadsheet; ~/Documents/scripts/mutt_bgrun /usr/bin/soffice %s
+application/vnd.oasis.opendocument.text; ~/Documents/scripts/mutt_bgrun /usr/bin/soffice %s
+
+# esto sirve al parecer para lo de winmail.dat
+application/ms-tnef; tnef -w %s
