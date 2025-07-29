@@ -10,6 +10,7 @@
 	user = rogorido
 [commit]
     gpgsign = true
+    template = ~/.gitmessage
 [credential]
     helper = cache
 [init]
