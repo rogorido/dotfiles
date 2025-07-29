@@ -1,0 +1,19 @@
+# key bindings
+map <PageUp> navigate previous
+map <PageDown> navigate next
+
+map + zoom in
+map - zoom out
+
+map <C-q> quit
+map q quit
+# esto tiene el problema de que modifica la tecla
+# para follow link
+map F toggle_fullscreen
+map d scroll 39
+map u scroll 39
+
+# esto sirve para que no pase a la primera página despues de 
+# la última
+#scroll_wrap false
+#show_inputbar false
