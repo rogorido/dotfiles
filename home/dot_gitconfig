@@ -1,0 +1,17 @@
+[user]
+	email = joseleopoldo1792@gmail.com
+	name = Igor Sosa Mayor
+	signingkey = 9BE020BF507FBBFD
+[push]
+	default = current
+[color]
+	ui = true
+[github]
+	user = rogorido
+[commit]
+    gpgsign = true
+[credential]
+    helper = cache
+[init]
+    defaultBranch = main
+
