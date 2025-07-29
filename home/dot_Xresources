@@ -1,0 +1,322 @@
+!! Set a default font and font size as below:
+st.font: Monospace-14
+
+Xft.dpi: 96
+Xft.antialias: true
+Xft.hinting: true
+Xft.rgba: rgb
+Xft.autohint: false
+Xft.hintstyle: hintslight
+Xft.lcdfilter: lcddefault
+
+! Enabled modi
+!rofi.modi:                           window,run,drun,ssh
+rofi.modi:                           window,drun
+rofi.opacity:                        100
+rofi.width:                          50
+rofi.lines:                          15
+rofi.columns:                        1
+! Font to use
+rofi.font:                           mono 11
+! Foreground color
+rofi.fg:                             #002B36
+! Background color
+rofi.bg:                             #FDF6E3
+! Foreground color for active row
+rofi.fg-active:                      #268BD2
+! Foreground color for urgent row
+rofi.fg-urgent:                      #DC322F
+! Foreground color for highlighted active row
+rofi.hlfg-active:                    #FDF6E3
+! Foreground color for highlighted urgent row
+rofi.hlfg-urgent:                    #FDF6E3
+! Background color for active row
+rofi.bg-active:                      #FDF6E3
+! Background color for urgent row
+rofi.bg-urgent:                      #FDF6E3
+! Background color for highlighted active row
+rofi.hlbg-active:                    #268BD2
+! Background color for highlighted urgent row
+rofi.hlbg-urgent:                    #DC322F
+! Background color for alternating row
+rofi.bgalt:                          #FDF6E3
+! Foreground color for highlighted row
+rofi.hlfg:                           #EEE8D5
+! Background color for highlighted row
+rofi.hlbg:                           #586E75
+! Border color
+rofi.bc:                             #002B36
+! Use extended color scheme
+rofi.color-enabled:                  true
+! Color scheme for normal row
+rofi.color-normal:                   #fdf6e3,#002b36,#eee8d5,#586e75,#eee8d5
+! Color scheme for urgent row
+rofi.color-urgent:                   #fdf6e3,#dc322f,#eee8d5,#dc322f,#fdf6e3
+! Color scheme for active row
+rofi.color-active:                   #fdf6e3,#268bd2,#eee8d5,#268bd2,#fdf6e3
+! Color scheme window
+rofi.color-window:                   #fdf6e3,#002b36
+! Border width
+rofi.bw:                             1
+! Location on screen
+rofi.location:                       7
+! Padding
+rofi.padding:                        5
+! Y-offset relative to location
+rofi.yoffset:                        0
+! X-offset relative to location
+rofi.xoffset:                        0
+! Always show number of lines
+rofi.fixed-num-lines:                false
+! Terminal to use
+rofi.terminal:                       rofi-sensible-terminal
+! Ssh client to use
+rofi.ssh-client:                     ssh
+! Ssh command to execute
+rofi.ssh-command:                    {terminal} -e {ssh-client} {host}
+! Run command to execute
+rofi.run-command:                    {cmd}
+! Command to get extra run targets
+rofi.run-list-command:               
+! Run command to execute that runs in shell
+rofi.run-shell-command:              {terminal} -e {cmd}
+! Disable history in run/ssh
+rofi.disable-history:                false
+! Use levenshtein sorting
+rofi.levenshtein-sort:               false
+! Set case-sensitivity
+rofi.case-sensitive:                 false
+! Enable sidebar-mode
+rofi.sidebar-mode:                   true
+! Set lazy filter limit
+rofi.lazy-filter-limit:              15000
+! Row height (in chars)
+rofi.eh:                             1
+! Enable auto select mode
+rofi.auto-select:                    false
+! Parse hosts file for ssh mode
+rofi.parse-hosts:                    false
+! Parse known_hosts file for ssh mode
+rofi.parse-known-hosts:              true
+! Set the modi to combine in combi mode
+rofi.combi-modi:                     window,run
+! Do a more fuzzy matching
+rofi.fuzzy:                          false
+! Use glob matching
+rofi.glob:                           false
+! Use regex matching
+rofi.regex:                          false
+! Tokenize input string
+rofi.tokenize:                       true
+! Monitor id to show on
+rofi.m:                              -1
+! Margin between rows
+rofi.line-margin:                    2
+! Pre-set filter
+rofi.filter:                         
+! Separator style (none, dash, solid)
+rofi.separator-style:                dash
+! Hide scroll-bar
+rofi.hide-scrollbar:                 false
+! Show markup
+rofi.markup-rows:                    false
+! Fullscreen
+rofi.fullscreen:                     false
+! Fake transparency
+rofi.fake-transparency:              false
+! DPI
+rofi.dpi:                            -1
+! Threads to use for string matching
+rofi.threads:                        0
+! Scrollbar width
+rofi.scrollbar-width:                8
+! Pidfile location
+rofi.pid:                            /run/user/1000/rofi.pid
+! Keybinding
+rofi.kb-primary-paste:               Control+Shift+v,Shift+Insert
+! Keybinding
+rofi.kb-secondary-paste:             Control+v,Insert
+! Keybinding
+!rofi.kb-clear-line:                  Control+u
+! Keybinding
+rofi.kb-move-front:                  Control+a
+! Keybinding
+rofi.kb-move-end:                    Control+e
+! Keybinding
+rofi.kb-move-word-back:              Alt+b
+! Keybinding
+rofi.kb-move-word-forward:           Alt+f
+! Keybinding
+rofi.kb-move-char-back:              Left,Control+b
+! Keybinding
+rofi.kb-move-char-forward:           Right,Control+f
+! Keybinding
+rofi.kb-remove-word-back:            Control+Alt+h
+! Keybinding
+rofi.kb-remove-word-forward:         Control+Alt+d
+! Keybinding
+rofi.kb-remove-char-forward:         Delete,Control+d
+! Keybinding
+rofi.kb-remove-char-back:            BackSpace,Control+h
+! Keybinding
+rofi.kb-accept-entry:                Control+j,Control+m,Return,KP_Enter
+! Keybinding
+rofi.kb-accept-custom:               Control+Return
+! Keybinding
+rofi.kb-accept-entry-continue:       Shift+Return
+! Keybinding
+rofi.kb-mode-next:                   Shift+Right,Control+Tab
+! Keybinding
+rofi.kb-mode-previous:               Shift+Left,Control+Shift+Tab
+! Keybinding
+rofi.kb-toggle-case-sensitivity:     grave,dead_grave
+! Keybinding
+rofi.kb-delete-entry:                Shift+Delete
+! Keybinding
+rofi.kb-row-left:                    Control+Page_Up
+! Keybinding
+rofi.kb-row-right:                   Control+Page_Down
+! Keybinding
+rofi.kb-row-up:                      Up,Control+p,Shift+Tab
+! Keybinding
+rofi.kb-row-down:                    Down,Control+n
+! Keybinding
+rofi.kb-row-tab:                     Tab
+! Keybinding
+rofi.kb-page-prev:                   Page_Up
+! Keybinding
+rofi.kb-page-next:                   Page_Down
+! Keybinding
+rofi.kb-row-first:                   Home,KP_Home
+! Keybinding
+rofi.kb-row-last:                    End,KP_End
+! Keybinding
+rofi.kb-row-select:                  Control+space
+! Keybinding
+rofi.kb-cancel:                      Escape,Control+bracketleft
+! Keybinding
+rofi.kb-custom-1:                    Alt+1
+! Keybinding
+rofi.kb-custom-2:                    Alt+2
+! Keybinding
+rofi.kb-custom-3:                    Alt+3
+! Keybinding
+rofi.kb-custom-4:                    Alt+4
+! Keybinding
+rofi.kb-custom-5:                    Alt+5
+! Keybinding
+rofi.kb-custom-6:                    Alt+6
+! Keybinding
+rofi.kb-custom-7:                    Alt+7
+! Keybinding
+rofi.kb-custom-8:                    Alt+8
+! Keybinding
+rofi.kb-custom-9:                    Alt+9
+! Keybinding
+rofi.kb-custom-10:                   Alt+0
+! Keybinding
+rofi.kb-custom-11:                   Alt+Shift+1
+! Keybinding
+rofi.kb-custom-12:                   Alt+Shift+2
+! Keybinding
+rofi.kb-custom-13:                   Alt+Shift+3
+! Keybinding
+rofi.kb-custom-14:                   Alt+Shift+4
+! Keybinding
+rofi.kb-custom-15:                   Alt+Shift+5
+! Keybinding
+rofi.kb-custom-16:                   Alt+Shift+6
+! Keybinding
+rofi.kb-custom-18:                   Alt+Shift+8
+! Keybinding
+rofi.kb-custom-17:                   Alt+Shift+7
+! Keybinding
+rofi.kb-custom-19:                   Alt+Shift+9
+! Keybinding
+rofi.kb-screenshot:                  Alt+Shift+S
+! Keybinding
+rofi.kb-toggle-sort:                 Alt+grave
+! Keybinding
+rofi.key-window:                     
+! Keybinding
+rofi.key-run:                        
+! Keybinding
+
+! Cuestiones variadas
+XTerm*termName: xterm-256color
+URxvt*termName: rxvt-unicode
+
+!URxvt.keysym.KP_Home: \033[1~
+!URxvt.keysym.KP_End:  \033[4~
+
+URxvt.scrollBar: false
+! Background color
+URxvt*background: black
+
+! Font color
+URxvt*foreground: white
+
+! -- Fonts -- !
+! esto lo tenía en el HP
+!URxvt*font: xft:Monospace:pixelsize=13.3:antialias=true
+!URxvtboldFont: xft:Monospace:pixelsize=13.3:bold:antialias=true
+
+! esta no está mal
+!URxvt.font:     xft:bitstream vera sans mono:size=13:antialias=true
+!URxvt.boldFont: xft:bitstream vera sans mono:bold:size=13:antialias=true
+
+! con esta me funcionan lo de los símbolos; o algunos al menos
+URxvt.font: xft:DejaVu Sans Mono:autohint=true:size=13,xft:Inconsolata\ for\ Powerline:autohint=true:size=13
+!URxvt.font: xft:DejaVu Sans Mono:autohint=true:size=13,xft:Droid Sans Mono for Powerline Nerd Font Complete:autohint=true:size=13
+!URxvt.font: xft:Droid Sans Mono for Powerline Nerd Font Complete:autohint=true:size=13
+!URxvt.font: xft:MesloLGS NF:size=11
+
+xft:symbola:size=10:minspace=False
+
+URxvt*color0:  #000000 // black
+URxvt*color1:  #B40000 // red
+URxvt*color2:  #00AA00 // green
+URxvt*color3:  #AAAA00 // yellow
+URxvt*color4:  #5555AA // blue
+URxvt*color5:  #AA00AA // magenta
+URxvt*color6:  #00AAAA // cyan
+URxvt*color7:  #AAAAAA // white
+!URxvt*color7: #FFFFFF // white
+URxvt*color8:  #555555 // black (now and below: bright)
+URxvt*color9:  #FF0000 // red
+URxvt*color10: #00FF00 // green
+URxvt*color11: #FFFF00 // yellow
+URxvt*color12: #6464FF // blue
+URxvt*color13: #FF00FF // magenta
+URxvt*color14: #00FFFF // cyan
+URxvt*color15: #FFFFFF // white
+
+URxvt*letterSpace: -1
+
+!URxvt.perl-ext-common: default,matcher,tabbedex,clipboard
+URxvt.perl-ext-common: default,matcher
+URxvt.url-launcher: /usr/bin/firefox
+URxvt.matcher.button: 1
+URxvt.depth: 32
+URxvt*saveLines: 50000
+URxvt.underlineURLs: false
+
+! para que salte palabras
+URxvt.keysym.Control-Left:    \033[1;5D
+URxvt.keysym.Control-Right:    \033[1;5C
+
+!URxvt.tabbed.autohide: true
+!URxvt.tabbed.title: false
+
+!URxvt.keysym.Shift-Control-C: perl:clipboard:copy
+!URxvt.keysym.Shift-Control-V: perl:clipboard:paste
+XTerm*metaSendsEscape: true
+
+!URxvt.tabbed.reopen-on-close: yes
+!URxvt.keysym.Control-t: perl:tabbedex:new_tab
+!URxvt.keysym.Control-Tab: perl:tabbedex:next_tab
+!URxvt.keysym.Control-Shift-Tab: perl:tabbedex:prev_tab
+
+! este sirve para subir/bajar líneas
+URxvt.keysym.Shift-Up: command:\033]720;1\007
+URxvt.keysym.Shift-Down: command:\033]721;1\007
