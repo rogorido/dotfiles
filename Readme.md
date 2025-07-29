@@ -14,6 +14,9 @@ These are most of my dotfiles managed with [chezmoi](https://www.chezmoi.io/).
 | Editor            | [emacs](https://www.gnu.org/software/emacs/)                                                                               |
 | IDE               | [neovim](https://neovim.io/) with [lazy.vim](https://github.com/folke/lazy.nvim)                                           |
 | Git TUI           | [emacs magit](https://magit.vc/), [lazygit](https://github.com/jesseduffield/lazygit), [tig](https://jonas.github.io/tig/) |
+| Music             | [mpd](https://www.musicpd.org/), [emms](https://www.gnu.org/software/emms/), [navidrome](https://www.navidrome.org/)       |
+
+
 
 
 
