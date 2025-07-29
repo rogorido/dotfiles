@@ -16,3 +16,9 @@
 [init]
     defaultBranch = main
 
+[include]
+   # Include aliases.
+    #path = .gitconfig_aliases
+
+    # Include extra configuration (if any).
+    #path = .gitconfig_local
