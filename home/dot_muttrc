@@ -1,0 +1,185 @@
+set mbox_type=Maildir
+set folder=$HOME/Mail/
+set header_cache=~/.mutt/cache/
+set spoolfile=+inbox
+set editor="emacsclient -nw" # -e '(set-background-color \"green\")'"
+set record=+sent
+set postponed=+queue
+
+# Configuraciones
+source ~/.mutt/keybindings
+source ~/.mutt/mailboxes
+source ~/.mutt/sidebar
+#source ~/.mutt/colors
+source ~/.mutt/colors.mutt
+#source ~/.mutt/subscribe # ya nouso mutt para las listas!
+source ~/.mutt/macros
+source ~/.mutt/gpg.general
+#source ~/.mutt/gpg
+
+# Adressen
+set alias_file=~/.mutt/aliasrc
+source ~/.mutt/aliasrc
+#source ~/.mutt/alumnosrc
+source ~/.mutt/uva-emails.rc
+source ~/.mutt/alumnos-geopolitica.rc
+source ~/.mutt/uva-doctorado.rc
+
+set sort_alias= alias
+set reverse_alias=yes
+set sort= date
+
+# Senden
+set from = 'Igor Sosa Mayor <igor.sosa@gmail.com>' #dirección de correo
+set realname = 'Igor Sosa Mayor' #Nombre real
+
+set sendmail = "/usr/bin/msmtp"
+set envelope_from=yes
+set sendmail_wait=-1
+
+
+auto_view text/html
+#set implicit_autoview
+
+set fast_reply=yes                      #no prompting on reply
+set include=yes   # incluye el texto en la respuesta sin preguntar
+#set attribution="Je %d %n skribis:"
+set attribution="Am %d, %n schrieb:"
+#set send_charset="us-ascii:iso-8859-1:iso-8859-15:utf-8"
+set abort_nosubject=no     # Abort, if message has no subject.
+set abort_unmodified=yes   # Abort, if message wasn't edited.
+set forward_format = "Fwd: %s"
+
+set ascii_chars		# This is for the thread markers
+
+set history=200     # Size of the history buffer
+set pager_index_lines=10  # how many index lines to show in the pager
+
+# parece que esto acelera el inicio
+# ver manual cap. 8.1
+folder-hook . 'set read_inc=1000'
+
+# esto es para que reconozca como enviados por mi
+# los emails con estas direcciones...
+alternates "(igor\.sosa@gmail\.com)|(rosagori@yahoo\.de)|(igor\.sosa@chello\.at)|(Igor\.Sosa@eui\.eu)|(joseleopoldo1792@yahoo\.de)|(Igor\.Sosa@eui\.emea\.microsoftonline\.com)|(spigsosa@phil\.uni-erlangen\.de)|(igor\.sosa\_mayor@uni-erfurt\.de)|(joseleopoldo1792@gmail\.com)|(igor.sosa@uva\.es)|(igor\.sosa@georeligion\.org)"
+
+#set nosmart_wrap                          # Don't want smart wrapping.
+set smart_wrap                          # Don't want smart wrapping.
+#set wrapmargin = 72
+set nomarkers                             # Don't want any wrap markers.
+set noconfirmappend			# When set, Mutt will prompt for confirmation when appending messages to an existing mailbox
+
+my_hdr User-Agent: Mutt 2.0.7
+my_hdr X-Operating-System: Archlinux: kernel `uname -r`
+my_hdr X-Editor: GNU Emacs 27.2
+
+alternative_order text/enriched text/plain text application/pgp-signature
+
+#alternative_order text/plain *
+
+# esto parece que funciona... aunque el asunto
+# es un poco liado y no sé si hay también otra manera...
+fcc-save-hook '~f Igor\.Sosa@eui\.eu' =eui-sent
+fcc-save-hook '~f igor\.sosa@uva.es' =uva/Enviados
+fcc-save-hook '~f igor\.sosa@georeligion\.org' =geo/Sent
+
+fcc-save-hook '~t ES-TEX@LISTSERV.REDIRIS.ES' =listas-gesendet
+
+# con esto abre la mailbox y va al último mensaje
+folder-hook . 'exec last-entry'
+
+# No saltar al siguiente email cuando llegamos al final del actual
+set pager_stop
+
+# No marcar los mensajes nuevos no leidos en otros accesos como viejos
+set nomark_old
+
+#macro pager \cb <pipe-entry>'url_handler.sh'<enter> 'Follow links with urlview'
+#macro pager \cb <pipe-entry>'urlview'<enter> 'Follow links with urlview'
+macro pager \cb <pipe-entry>'urlscan'<enter> 'Follow links with urlview'
+
+# signature
+#send-hook . 'unset signature'
+#send-hook "~f igor.sosa@gmail.com" 'source ~/.mutt/general'
+#send-hook "~f Igor.Sosa@eui.emea.microsoftonline.com" 'source ~/.mutt/eui'
+#send-hook "~f joseleopoldo1792@gmail.com" 'source ~/.mutt/joseleopoldo1792'
+
+#send-hook .  'source ~/.mutt/gpg.general'
+
+folder-hook . 'source ~/.mutt/personal'
+folder-hook eui2 'source ~/.mutt/eui'
+
+folder-hook =uva/INBOX 'source ~/.mutt/uva'
+folder-hook =uva/Estudiantes 'source ~/.mutt/uva'
+folder-hook =uva/Infos 'source ~/.mutt/uva'
+folder-hook =uva/Geografia 'source ~/.mutt/uva'
+folder-hook =uva/Semdoc 'source ~/.mutt/uva'
+folder-hook =uva/Enviados 'source ~/.mutt/uva'
+
+folder-hook =geo/INBOX 'source ~/.mutt/geo'
+folder-hook =geo/sent 'source ~/.mutt/geo'
+
+folder-hook . set sort= date
+
+# este es el general
+folder-hook . 'set index_format="%4C %Z %{%b %d} %-25.25L (%?l?%4l&%4c?) %s"'
+# este es uno básico
+set my_index_format_basic="%4C %Z %{%b %d} %2E  %s"
+
+# esto creo que mejor no ponerlo...
+#set ignore_list_reply_to
+
+# esto qué es? 
+set followup_to
+set honor_followup_to=yes
+
+#set display_filter='sed -e "/^gpg:[ ]\+aka/d"'
+
+set history_file = '~/.mutthistory'
+set save_history=1000            # number of lines of history in file
+
+#macro pager "<esc>4" '<enter-command>set display_filter="/bin/sh ~/gpg-wrap.sh"<enter><exit><display-message>'
+#macro pager "<esc>5" '<enter-command>unset display_filter<enter><exit><display-message>'
+
+# al parecer es para que los attachments no tengan esos nombres raros
+set rfc2047_parameters=yes
+
+set beep_new
+
+# con esto se soluciona el problema de que unas comillas
+# que usa Outlook que aparecen representadas como \223 y \224
+charset-hook ^us-ascii$ windows-1252
+charset-hook ^iso-8859-1$ windows-1252
+# de todas formas, esto parece que es de la versión de mutt
+# con el compat patch y que con la oficial no existe esta variable
+set assumed_charset=windows-1252
+
+source ~/.mutt/send-hooks
+source ~/.mutt/headers
+
+# Last, but not least, get mutt to display its version on startup.
+push <show-version>
+
+#set indent_string=""
+
+set print_command="muttprint"
+
+# sirve para que cambie más rápido de directorio...
+set sleep_time = 0
+
+#set mailcap_path = ~/.mutt/mailcap 
+#auto_view text/html
+macro attach 'V' "<pipe-entry>iconv -c --to-code=UTF8 > ~/.cache/mutt/mail.html<enter><shell-escape>firefox ~/.cache/mutt/mail.html<enter>"
+
+#set mime_forward=yes
+#set mime_forward_rest=yes
+
+# esto en teoría sirve para reducir los Cc: largos
+# tomado de: http://www.spocom.com/users/gjohnson/mutt/
+# funciona, pero da un pqueño warning pelma...
+#set display_filter=~/Descargas/mail-to-filter
+
+### Local Variables: ***
+### mode: muttrc ***
+### End: ***
+
