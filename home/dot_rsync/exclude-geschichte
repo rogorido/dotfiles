@@ -1,0 +1,31 @@
+# general
+*.el
+
+# imagenes, videos, etc.
+*.jpg
+*.JPG
+*.jpe
+*.jpeg
+*.gif
+*.png
+*.mkv
+*.avi
+*.mp4
+*.ogv
+*.webm
+
+# pdfs
+#*.pdf
+
+# gis
+*.gpkg
+*.tif
+*.shp
+*.shx
+*.cpg
+*.prj
+*.dbf
+*.geojson
+
+# otros
+.nuxt/

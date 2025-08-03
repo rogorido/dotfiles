@@ -1,0 +1,9 @@
+node_modules/
+public/
+_site/
+vendor/
+.git/
+.ccls-cache/
+.cache/
+.log/
+dist/
