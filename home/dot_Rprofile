@@ -1,0 +1,151 @@
+## Load packages
+# message("\n******************************\nCargando diferentes paquetes\n******************************")
+#require(ggplot2)
+#require(plyr)
+#require(dplyr)
+#suppressPackageStartupMessages(require(dplyr))
+#require(reshape2)	#data manipulation
+#require(tidyr)
+#require(RColorBrewer)
+#require(Hmisc)
+#require(tidyverse)
+
+# wide display with multiple monitors
+options("width"=120)
+options("pdfviewer"="zathura")
+# Don't print more than 1000 lines
+options(max.print=500)
+# entiendo que deshabilita la notación científica
+# es una especie de valor de penalización
+options(scipen = 999)
+
+#-----------------------------------------------------------------------
+#                             Functions
+#-----------------------------------------------------------------------
+
+# esto crea un nuevo environment y así no se llena de porquería
+# el que uso 
+.env <- new.env()
+
+# y luego metemos todas las variables ahí
+.env$s <- base::summary
+.env$h <- utils::head
+#.env$muestra <- prettyR::describe
+#A <- plyr::arrange
+.env$actualizarnuevo <- function (...)
+    {utils::update.packages(ask=F, lib.loc="/home/igor/R/x86_64-unknown-linux-gnu-library/3.1/")}
+
+# muestra las columnas con NAs
+.env$nacols <- function(df) {
+    colnames(df)[unlist(lapply(df, function(x) any(is.na(x))))]
+}
+
+# cuenta los NAs por columna 
+.env$contarnas <- function(df){
+    total <- colSums(is.na(df))
+    filas <- nrow(df) # para el porcentaje
+    columnas <- names(total)
+    datos <- data.frame(columnas, total)
+
+    # creamos el porcentaje
+    datos$prozent <- round(datos$total / filas * 100, 2)
+
+    # borramos los nombres de las filas
+    row.names(datos) <- NULL
+
+    # ordenamos
+    datos <- datos[order(-datos$total),]
+
+    return(datos)
+}
+
+# cuenta los NAs por columna 
+.env$menorque <- function(df, valor = 0, na.omit=FALSE){
+    # deshabilitamos warnings
+    opt <- options (warn = -1)
+    on.exit(options(opt))
+
+    # hacemos cálculos
+    total <- colSums(df < valor, na.rm = TRUE)
+    filas <- nrow(df) # para el porcentaje
+    columnas <- names(total)
+    datos <- data.frame(columnas, total)
+
+    # creamos el porcentaje
+    datos$prozent <- round(datos$total / filas * 100, 2)
+
+    # borramos los nombres de las filas
+    row.names(datos) <- NULL
+
+    # ordenamos
+    datos <- datos[order(-datos$total),]
+
+    if (na.omit == TRUE){
+        datos <- na.omit(datos)
+    }
+    
+    return(datos)
+}
+
+# cuenta los NAs por columna 
+.env$mayorque <- function(df, valor = 0, na.omit = FALSE){
+    total <- colSums(df > valor, na.rm = TRUE)
+    filas <- nrow(df) # para el porcentaje
+    columnas <- names(total)
+    datos <- data.frame(columnas, total)
+
+    # creamos el porcentaje
+    datos$prozent <- round(datos$total / filas * 100, 2)
+
+    # borramos los nombres de las filas
+    row.names(datos) <- NULL
+
+    # ordenamos
+    datos <- datos[order(-datos$total),]
+
+    if (na.omit == TRUE){
+        datos <- na.omit(datos)
+    }
+
+    return(datos)
+}
+
+# identificar qué filas tienen NAs
+.env$identificarfilasconnas <- function(df){
+    df[unique(unlist(lapply(df, function(x) which(is.na(x))))),]
+}
+
+# esto sirve para cortar las conexiones de Postgresql
+# porque a veces llega un extraño máximo
+.env$cortarConexiones <- function() {
+    lapply(dbListConnections(PostgreSQL()), dbDisconnect)
+    }
+
+# cargamos todas las funciones esas extra
+attach(.env)
+
+## ht==headtail, i.e., show the first and last 10 items of an object
+#ht <- function(d) rbind(head(d,10),tail(d,10))
+
+## Show the first 5 rows and first 5 columns of a data frame or matrix
+#hh <- function(d) d[1:5,1:5]
+
+# definimos unos colores
+#colblues<-colorRampPalette(brewer.pal(9,"Blues"))(100)
+#colreds<-colorRampPalette(brewer.pal(9,"Reds"))(100)
+#colgreens<-colorRampPalette(brewer.pal(9,"Greens"))(100)
+#colgreens2<-colorRampPalette(brewer.pal(9,"YIGn"))(100)
+#colmagenta<-colorRampPalette(c("white","magenta"))(100)
+#colmagenta2<-colorRampPalette(c("blue","white","magenta"))(100)
+#colmagenta3<-colorRampPalette(brewer.pal(9,"RdPu"))(100)
+
+# esto es para poder combinar los nombres de los municipios
+# tal y como aparecen en el INE y los nombre de www.gadm.org
+# es decir: Regueras (Las) --> Las Regueras
+#normalizarmunicipios<-function(mun){
+#  mun$municipio<-gsub("([^\\(]+)(\\()(.*)(\\))","\\3 \\1", mun$municipio, perl=TRUE)
+#  mun$municipio<-gsub("\\s+$","",mun$municipio)
+#  return(mun)
+#}
+
+message("\n******************************\nCargado Rprofile.r\n******************************")
