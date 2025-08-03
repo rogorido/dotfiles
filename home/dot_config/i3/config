@@ -1,0 +1,349 @@
+# i3 config file (v4)
+
+set $mod Mod4
+
+set $WS1 "1:emacs"
+set $WS2 "2:gnus"
+set $WS3 "3:irc"
+set $WS4 "4:net"
+set $WS5 "5:work"
+set $WS6 "6:ehum"
+set $WS7 "7:alia"
+set $WS8 "8:mutt"
+set $WS9 "9:mpd"
+set $WS0 "10:com"
+
+# Font for window titles. Will also be used by the bar unless a different font
+# is used in the bar {} block below.
+font pango:monospace 9
+
+# This font is widely installed, provides lots of unicode glyphs, right-to-left
+# text rendering and scalability on retina/hidpi displays (thanks to pango).
+font pango:DejaVu Sans Mono 9
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+#bindsym $mod+Return exec i3-sensible-terminal
+#bindsym $mod+Return exec terminator
+#bindsym $mod+Return exec xfce4-terminal
+bindsym $mod+Return exec urxvtc
+
+# kill focused window
+bindsym $mod+Shift+q kill
+
+# start dmenu (a program launcher)
+bindsym $mod+Shift+d exec dmenu_run
+#bindsym $mod+d exec --no-startup-id j4-dmenu-desktop
+bindsym $mod+d exec --no-startup-id rofi -show drun
+bindsym $mod+control+d exec --no-startup-id /home/igor/programacion/shell/dmenfm
+
+# change focus
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+# alternatively, you can use the cursor keys:
+# bindsym $mod+Left focus left
+# bindsym $mod+Down focus down
+# bindsym $mod+Up focus up
+# bindsym $mod+Right focus right
+
+# move focused window
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+# alternatively, you can use the cursor keys:
+#bindsym $mod+Shift+Left move left
+#bindsym $mod+Shift+Down move down
+#bindsym $mod+Shift+Up move up
+#bindsym $mod+Shift+Right move right
+
+# split in horizontal orientation
+bindsym $mod+b split h
+
+# split in vertical orientation
+bindsym $mod+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+#bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+# focus the child container
+#bindsym $mod+d focus child
+
+# switch to workspace
+bindsym $mod+1 workspace $WS1
+bindsym $mod+2 workspace $WS2
+bindsym $mod+3 workspace $WS3
+bindsym $mod+4 workspace $WS4
+bindsym $mod+5 workspace $WS5
+bindsym $mod+6 workspace $WS6
+bindsym $mod+7 workspace $WS7
+bindsym $mod+8 workspace $WS8
+bindsym $mod+9 workspace $WS9
+bindsym $mod+0 workspace $WS0 
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace $WS1
+bindsym $mod+Shift+2 move container to workspace $WS2
+bindsym $mod+Shift+3 move container to workspace $WS3
+bindsym $mod+Shift+4 move container to workspace $WS4
+bindsym $mod+Shift+5 move container to workspace $WS5
+bindsym $mod+Shift+6 move container to workspace $WS6
+bindsym $mod+Shift+7 move container to workspace $WS7
+bindsym $mod+Shift+8 move container to workspace $WS8
+bindsym $mod+Shift+9 move container to workspace $WS9
+bindsym $mod+Shift+0 move container to workspace $WS0
+
+bindsym $mod+Control+Left workspace prev
+bindsym $mod+Control+Right workspace next
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+# exit i3 (logs you out of your X session)
+#bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Shift+e exec i3-msg exit
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+        # Pressing left will shrink the window’s width.
+        # Pressing right will grow the window’s width.
+        # Pressing up will shrink the window’s height.
+        # Pressing down will grow the window’s height.
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+   	bindsym space mode "default"
+        bindsym $mod+r mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+# Start i3bar to display a workspace bar (plus the system information i3status
+# finds out, if available)
+bar {
+        #status_command i3status -c ~/.config/i3/i3status.conf
+        #status_command py3status -c ~/.config/i3/i3status.conf
+	status_command python ~/.config/i3/i3barpython.py
+	position top
+   	font pango:DejaVu Sans Mono, Icons 9 
+        #strip_workspace_numbers yes
+        # lo del systray funciona si no se pone nada...
+        # si pongo esto de abajo no salen los iconos
+#        tray_output LVDS
+#        tray_output primary
+#	mode hide
+}
+
+set $Locker i3lock -c 000000 -p default && sleep 1
+
+set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown, (u) switch user
+mode "$mode_system" {
+    bindsym l exec --no-startup-id $Locker, mode "default"
+    bindsym e exec --no-startup-id i3-msg exit, mode "default"
+    bindsym s exec --no-startup-id $Locker && systemctl suspend, mode "default"
+    bindsym h exec --no-startup-id $Locker && systemctl hibernate, mode "default"
+    bindsym r exec --no-startup-id systemctl reboot, mode "default"
+    bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"  
+    bindsym u exec dm-tool switch-to-greeter, mode "default"  
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+bindsym $mod+Shift+x mode "$mode_system"
+
+bindsym $mod+z sticky toggle
+
+bindsym KP_Begin exec mpc toggle
+bindsym KP_Multiply exec mpc next
+bindsym KP_Divide exec mpc prev
+bindsym KP_Subtract exec "amixer set Master 5%-"
+bindsym KP_Add exec "amixer set Master 5%+"
+bindsym XF86AudioMute exec amixer set Master toggle
+
+# con -s permite seleccionar un fragmento de pantalla
+# eso de --release es porque si no al tocar el ratón i3 se confunde
+# y evita el screenshot
+bindsym --release Print exec "scrot -d 4 -s $HOME/latexpruebas/`date +%Y-%m-%d_%H:%M:%S`.png"
+# -u es para la ventana activa
+bindsym --release $mod+Print exec "scrot -u $HOME/latexpruebas/`date +%Y-%m-%d_%H:%M:%S`.png"
+
+bindsym $mod+F1 exec --no-startup-id rofi -show window
+bindsym $mod+F2 exec firefox
+bindsym $mod+F3 exec Thunar
+bindsym $mod+F4 exec emacs
+bindsym $mod+F6 exec ario
+
+for_window [class="Skype"] floating enable
+#for_window [class="ario"] floating enable
+for_window [class="mpv"] floating enable, resize set 600 px 300 px, move absolute position 766 px 18 px, sticky enable, border 1pixel
+for_window [class="(?i)vlc"] floating enable, resize set 600 px 300 px, move absolute position 766 px 18 px, border 1pixel
+#for_window [class="(?i)baka-mplayer"] floating enable, resize set 600 px 300 px, move absolute position 766 px 18 px, sticky enable, border 1pixel
+for_window [class="Telegram"] floating enable
+for_window [class="Thunar"] floating enable, border normal
+for_window [class="Ristretto"] floating enable, border normal
+for_window [class="Terminator"] border none
+for_window [class="Galculator"] floating enable
+# esto es para los gráficos de R
+for_window [class="R_x11"] floating enable
+for_window [class="(?i)baobab"] floating enable
+for_window [class="(?i)scid"] floating enable
+for_window [title="Feh"] floating enable
+for_window [class="File-roller"] floating enable
+for_window [class="Xarchiver"] floating enable
+for_window [class="Orage"] floating enable
+for_window [class="(?i)gsopcast"] floating enable
+for_window [window_role="Preferences"] floating enable
+for_window [class="(?i)VirtualBox" title="(?i)Manager"] floating enable
+for_window [class="(?i)VirtualBox"] floating enable
+# no funciona pues parece que las ventajas de qiv no tienen
+# la propiedad "clase"
+# for_window [class="qiv"] floating enable
+for_window [class="(?i)sxiv"] floating enable
+
+assign [class="Firefox"] $WS3
+assign [class="luakit"] $WS3
+assign [class="(?i)skype"] $WS0
+assign [class="(?i)telegram"] $WS0
+assign [class="(?i)scid"] $WS0
+assign [class="(?i)gsopcast"] $WS0
+# terminales con programas
+#assign [title="^ncmpcpp"] $WS9
+#assign [title="^correo-personal"] $WS8
+#assign [title="^correo-erfurt"] $WS8
+assign [class="Emacs" title="^gnus"] $WS2
+assign [class="Emacs" title="^irc"] $WS2
+
+focus_follows_mouse no
+workspace_layout tabbed
+workspace_auto_back_and_forth yes
+
+#Steuerung der Helligkeit
+#bindsym XF86MonBrightnessUp exec xbacklight +10
+#bindsym XF86MonBrightnessDown exec xbacklight -10
+bindsym XF86MonBrightnessUp exec light -A 10
+bindsym XF86MonBrightnessDown exec light -U 10
+
+# estos no parecen estar mal
+#client.focused #0088CC #0088CC #ffffff #dddddd
+#client.focused_inactive #333333 #333333 #888888 #292d2e
+#client.unfocused #333333 #333333 #888888 #292d2e
+#client.urgent #2f343a #900000 #ffffff #900000
+
+# Make the currently focused window a scratchpad start dmenu (a program
+# launcher)
+bindsym $mod+Shift+minus move scratchpad
+#
+# # Show the first scratchpad window
+bindsym $mod+Shift+plus scratchpad show, move absolute position 0 px 18 px 
+
+new_window pixel 1
+new_float pixel 1
+
+#exec --no-startup-id nm-applet
+
+#exec --no-startup-id mpd
+#exec --no-startup-id octopi-notifier
+#exec --no-startup-id telegram
+exec telegram
+#exec --no-startup-id syndaemon -k -i 1.2 -d
+#exec --no-startup-id syndaemon -i 1.2 -t -d
+exec --no-startup-id dunst
+#exec --no-startup-id xfce4-terminal -T 'ncmpcpp' -e ncmpcpp
+exec --no-startup-id urxvtc -title 'ncmpcpp' -e ncmpcpp
+exec --no-startup-id urxvtc -title 'correo-personal' -e 'mutt -f ~/Mail/inbox'
+exec --no-startup-id urxvtc -title 'correo-erfurt' -e 'mutt -f ~/Mail/erfurt/INBOX'
+exec --no-startup-id nitrogen --set-auto ~/Pictures/diversos/i3-wallpaper-negro.png
+#exec --no-startup-id mpdscribble
+
+
+# Volume!
+# exec --no-startup-id xfce4-volumed
+# Start Thunar Daemon
+# exec --no-startup-id thunar --daemon 
+
+# Make XFCE notifications play nicely
+#for_window [class="Xfce4-notifyd"] floating enable; border none; focus mode_toggle
+
+
+# class        border  backgr. text    indicator
+#client.focused #0088CC #FFA500 #ffffff #dddddd
+client.focused #0088CC #FFA500 #ffffff #202264
+
+# Toggle between hide state and show state
+#bindsym $mod+m bar hidden_state toggle
+
+# Put this window on the presentation output.
+#bindsym $mod+Shift+x move container to output VGA-0
+bindsym $mod+x move container to output VGA-0
+
+# no funciona
+# no_focus [class="(?i)skype"] 
+
+gaps inner 5
+gaps outer 2
+
+set $mode_gaps Gaps: (o) outer, (i) inner
+set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
+set $mode_gaps_inner Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)
+bindsym $mod+Shift+g mode "$mode_gaps"
+
+mode "$mode_gaps" {
+        bindsym o      mode "$mode_gaps_outer"
+        bindsym i      mode "$mode_gaps_inner"
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+mode "$mode_gaps_inner" {
+        bindsym plus  gaps inner current plus 2
+        bindsym minus gaps inner current minus 2
+        bindsym 0     gaps inner current set 0
+
+        bindsym Shift+plus  gaps inner all plus 2
+        bindsym Shift+minus gaps inner all minus 2
+        bindsym Shift+0     gaps inner all set 0
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+mode "$mode_gaps_outer" {
+        bindsym plus  gaps outer current plus 2
+        bindsym minus gaps outer current minus 2
+        bindsym 0     gaps outer current set 0
+
+        bindsym Shift+plus  gaps outer all plus 2
+        bindsym Shift+minus gaps outer all minus 2
+        bindsym Shift+0     gaps outer all set 0
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+smart_gaps on
