@@ -1,0 +1,36 @@
+#!/bin/sh
+#
+# ~/.xinitrc
+#
+# Executed by startx (run your window manager from here)
+
+if [ -d /etc/X11/xinit/xinitrc.d ]; then
+  for f in /etc/X11/xinit/xinitrc.d/*; do
+    [ -x "$f" ] && . "$f"
+  done
+  unset f
+fi
+
+export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
+
+udiskie &
+
+# entiedno que esto con libinput ya no vale?
+#syndaemon -i 1.2 -t -d &
+
+# start urxvt as a daemon
+# urxvtd -q -o -f &
+
+mpd &
+
+unclutter &
+
+# flameshot &
+
+xinput --set-prop 9 'libinput Accel Speed' 0.15
+
+# caps lock es nuestra ESc 
+# https://superuser.com/questions/566871/how-to-map-the-caps-lock-key-to-escape-key-in-arch-linux
+setxkbmap -option caps:escape
+# ssh digitalocean-postgresql -v -N -f -n
+
