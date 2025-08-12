@@ -16,6 +16,9 @@
 [init]
     defaultBranch = main
 
+[merge]
+    conflictStyle = diff3
+
 [include]
    # Include aliases.
     path = .gitconfig_aliases
