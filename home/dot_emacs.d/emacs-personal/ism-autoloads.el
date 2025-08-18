@@ -64,6 +64,5 @@
 ;;(add-to-list 'auto-mode-alist '("\\.vue\\'" . vue-mode))
 ;;(add-to-list 'auto-mode-alist '("\\.vue\\'" . vue-ts-mode))
 
-
 (provide 'ism-autoloads)
 ;;; ism-autoloads.el ends here
