@@ -46,6 +46,24 @@
 (add-to-list 'auto-mode-alist '("\\.qr$" . sparql-mode))
 ;(add-to-list 'auto-mode-alist '("drill-\\.org$" . anki-editor-mode))
 
+;;; webgeneral
+;;; adtención pongo esto por ahora aquí para ver si consigo que
+;;; funcione...
+(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.ejs?\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.hbs?\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.pug?\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.astro?\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.css?\\'" . css-mode))
+;(add-to-list 'auto-mode-alist '("\\.js\\'" . web-mode))
+;;(add-to-list 'auto-mode-alist '("\\.js\\'" . rjsx-mode))
+;;(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+;;(add-to-list 'auto-mode-alist '("\\.js\\'" . typescript-mode))
+(add-to-list 'auto-mode-alist '("\\.js\\'" . js-mode))
+(add-to-list 'auto-mode-alist '("\\.vue\\'" . web-mode))
+;;(add-to-list 'auto-mode-alist '("\\.vue\\'" . vue-mode))
+;;(add-to-list 'auto-mode-alist '("\\.vue\\'" . vue-ts-mode))
+
 
 (provide 'ism-autoloads)
 ;;; ism-autoloads.el ends here
