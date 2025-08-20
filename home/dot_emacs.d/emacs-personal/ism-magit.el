@@ -35,7 +35,14 @@
   )
 
 (use-package forge
-  :after magit)
+  :after magit
+  :config
+  (defun my/disable-auto-fill-enable-visual-line ()
+    "Disable `auto-fill-mode` and enable `visual-line-mode`."
+    (auto-fill-mode -1)
+    (visual-line-mode 1))
+
+  (add-hook 'forge-post-mode-hook #'my/disable-auto-fill-enable-visual-line))
 
 ;;
 ;; TODO: I have to change the keybindings!
