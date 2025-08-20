@@ -37,6 +37,11 @@
     side-by-side = true
     line-numbers = true
 
+# [advice]
+# 	detachedHead = false
+# 	pushNonFastForward = false
+# 	statusHints = false
+	
 [include]
    # Include aliases.
     path = .gitconfig_aliases
