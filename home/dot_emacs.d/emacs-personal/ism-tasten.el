@@ -4,7 +4,7 @@
 (global-set-key [f2] 'split-window-vertically)
 (global-set-key [f3] 'split-window-horizontally)
 (global-set-key [f4] 'kill-buffer)
-;;(global-set-key [f5] 'ranger)
+(global-set-key [f5] 'ism/toggle-two-split-window)
 ;;(global-set-key [f5] 'dired-jump)
 ;;(global-set-key [f6] 'privat)
 (global-set-key [f6] 'enlarge-window)
