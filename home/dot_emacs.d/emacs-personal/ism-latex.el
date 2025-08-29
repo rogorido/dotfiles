@@ -145,6 +145,9 @@
 (add-hook 'TeX-after-compilation-finished-functions
           #'TeX-revert-document-buffer)
 
+(add-hook 'LaTeX-mode-hook 'TeX-source-correlate-mode)
+(setq TeX-source-correlate-method 'synctex)
+(setq TeX-source-correlate-start-server t)
 
 (provide 'ism-latex)
 ;;; ism-latex.el ends here
