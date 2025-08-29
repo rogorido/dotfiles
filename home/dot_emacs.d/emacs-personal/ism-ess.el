@@ -4,6 +4,19 @@
 ;; al parecer esto está deprecado
 ;;(setq ess-smart-S-assign-key ";")  ;if ";" needed, press ";" key twice
 
+;; In ESS when I am evaluating chunks of code in a .R file using C-c
+;; C-j or C-c C-r (to send the line or region to a running R
+;; process), how can I get the R buffer to scroll down
+;; automatically, such that after evaluating a region the cursor is
+;; at the bottom, at the prompt?
+;; http://www.kieranhealy.org/blog/archives/2009/10/12/make-shift-enter-do-a-lot-in-ess/
+
+;; (add-hook 'ess-mode-hook
+;;           '(lambda()
+;;              (setq comint-scroll-to-bottom-on-input t)
+;;              (setq comint-scroll-to-bottom-on-output t)
+;;              (setq comint-move-point-for-output t)))
+
 (use-package ess
   :defer t
 ;  :init (require 'ess-site)
