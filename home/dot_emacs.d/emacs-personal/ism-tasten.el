@@ -101,5 +101,11 @@
 ;; expreg package
 (define-key global-map (kbd "C-M-SPC") 'er/expand-region)
 
+;; teclas para saltar 5 líneas para arriba y para abajo
+(global-set-key (kbd "M-n") (kbd "C-u 5 C-n"))
+(global-set-key (kbd "M-p") (kbd "C-u 5 C-p"))
+
+(global-set-key (kbd "C-x f") 'find-file) ;;el default es set-fill-column 
+
 (provide 'ism-tasten)
 ;;; ism-tasten.el ends here
