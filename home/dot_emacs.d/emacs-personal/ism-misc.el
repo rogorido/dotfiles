@@ -77,8 +77,10 @@
 ;; Other packages
 (add-to-list 'load-path "~/giteando/emacs-request/")
 (add-to-list 'load-path "~/giteando/anki-editor/")
-;(setq request-log-level 'debug)
-;(setq request-log-level 'error)
+(add-to-list 'load-path "~/giteando/expand-region.el/")
+;;(setq request-log-level 'debug)
+;;(setq request-log-level 'error)
+(require 'expand-region)
 
 ;; esto parece que deeshabilita completamente lo de vc-mode
 ;; (setq vc-handled-backends nil)

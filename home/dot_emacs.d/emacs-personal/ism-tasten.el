@@ -99,7 +99,7 @@
 ;; en emms tenemos las teclas de EMMS (con C-c e)
 
 ;; expreg package
-(define-key global-map (kbd "C-M-SPC") 'expreg-expand)
+(define-key global-map (kbd "C-M-SPC") 'er/expand-region)
 
 (provide 'ism-tasten)
 ;;; ism-tasten.el ends here
