@@ -582,7 +582,7 @@ awful.screen.connect_for_each_screen(function(s)
 			-- s.uva,
 			s.georeligion,
 			bar_spr,
-			-- contratowidget,
+			contratowidget,
 			-- bar_spr,
 			s.volumewidget,
 			cajonsistema,			--wibox.widget.systray(),
@@ -1214,7 +1214,7 @@ end
 -- Mis programas
 
 awful.util.spawn_with_shell("mpdscribble")
-awful.util.spawn_with_shell("xfce4-power-manager")
+-- awful.util.spawn_with_shell("xfce4-power-manager")
 
 -- o awful.spawn.with_shell???
-awful.util.spawn_with_shell("setxkbmap -option caps:escape")
+-- awful.util.spawn_with_shell("setxkbmap -option caps:escape")
