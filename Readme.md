@@ -17,3 +17,11 @@ These are most of my dotfiles managed with [chezmoi](https://www.chezmoi.io/).
 | Music             | [mpd](https://www.musicpd.org/), [emms](https://www.gnu.org/software/emms/), [navidrome](https://www.navidrome.org/)                   |
 
 
+# Awesome 
+
+![Awesome in action](./assets/screenshot1.png "Awesome in action")
+
+
+# Emacs 
+
+![Emacs in action](./assets/emacs.png "Emacs in action")
