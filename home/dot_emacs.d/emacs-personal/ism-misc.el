@@ -241,5 +241,7 @@
 (with-eval-after-load 'transient
     (transient-bind-q-to-quit))
 
+(setq transient-show-common-commands t)
+
 (provide 'ism-misc)
 ;;; ism-misc.el ends here
