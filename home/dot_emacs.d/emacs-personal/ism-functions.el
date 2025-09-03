@@ -703,5 +703,30 @@ emms-play-file."
         (select-window first-win)
         (if this-win-2nd (other-window 1))))))
 
+;;
+;; Functions to manage chats with gptel.
+;; 
+
+;; macro to create the functions!
+(defmacro ism/--switch-to-chat (buffer-name)
+  "Genera una función que cambia al buffer de chat especificado."
+  `(defun ,(intern (format "ism/switch-to-chat-%s" buffer-name)) ()
+     "Switch to the %s chat buffer."
+     (interactive)
+     (let* ((real-buffer-name ,(concat "chat" buffer-name ".org"))
+            (buffer (get-buffer real-buffer-name)))
+       (if buffer
+           (switch-to-buffer buffer)
+         (progn
+           (find-file (concat "~/latexpruebas/" real-buffer-name))
+           (gptel-mode))))))
+
+;; We create the functions using the macro 
+
+(ism/--switch-to-chat "linux")
+(ism/--switch-to-chat "science")
+(ism/--switch-to-chat "prog")
+
+
 (provide 'ism-functions)
 ;;; ism-functions.el ends here
