@@ -33,9 +33,9 @@
 _b_ buscar        _gg_ abrir proyecto        _tr_ georeligion              _l_ lernen             _acv_ citas (V)    
 _m_ música        _gb_ abrir bookgeo         _tf_ fichar                   _O_ orgs               _acp_ citas (P)    
 _G_ gastos        _gr_ abrir georeligion     _tz_ zfassungen               _x_ buffers molestos   ^ ^                
-_ce_ .emacs       _gc_ capítulos             _tc_ cajones                  ^ ^                    ^ ^                
-_co_ config       _dr_ rezos                 _tk_ konferenzen              ^ ^                    ^ ^                
-_k_ Kinder        _dg_ gobierno              _tC_ Cataluña                 ^ ^                    ^ ^                
+_ce_ .emacs       _gc_ capítulos             _tc_ cajones                  _kc_ chat ciencia      ^ ^
+_co_ config       _dr_ rezos                 _tk_ konferenzen              _kp_ chat programar    ^ ^                
+_K_ Kinder        _dg_ gobierno              _tC_ Cataluña                 _kl_ chat linux        ^ ^                
 _s_ sol           ^ ^                        _tl_ Lernenweb                ^ ^                    ^ ^                
 "
   ("b" hydra-buscar/body)
@@ -44,7 +44,7 @@ _s_ sol           ^ ^                        _tl_ Lernenweb                ^ ^  
   ("l" ism/abrir-ficheros-lernen)
   ("O" ism/abrir-ficheros-org)
   ("e" hydra-erc/body)
-  ("k" (find-file "~/Documents/org/kinder.org"))
+  ("K" (find-file "~/Documents/org/kinder.org"))
   ("T" ism/ir-a-telegram-root)
   ("G" (find-file "~/Documents/gastos/ledgers/2024-gastos.ledger"))
   ("m" (tab-bar-select-tab 5))
@@ -63,6 +63,9 @@ _s_ sol           ^ ^                        _tl_ Lernenweb                ^ ^  
   ("tz" ism/abrir-ficheros-zusammenfassungen)
   ("tc" ism/abrir-cajones)
   ("tC" (tab-bar-select-tab 2))
+  ("kc" (ism/switch-to-chat-science))
+  ("kp" (ism/switch-to-chat-prog))
+  ("kl" (ism/switch-to-chat-linux))
   ("x" ism/eliminar-buffers-molestos)
   ("acv" (org-agenda nil "cv"))
   ("acp" (org-agenda nil "cp"))
