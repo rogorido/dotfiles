@@ -35,83 +35,42 @@
 ; es algo de buscar los directorios.
 (setq emms-source-file-directory-tree-function 'emms-source-file-directory-tree-find)
 
-;; (emms-browser-make-filter "clasica"
-;;                           (emms-browser-filter-only-dir "~/musica/clasica"))
+(setq emms-filters-multi-filter-save-file "~/cojonesviudos.el")
 
+(setq general-filters
+      '(
+        ("Directory" "clasica" "musica/clasica")
+        ("Directory" "renacimiento" "musica/renacimiento")
+        ("Directory" "medieval" "musica/medieval")
+        ("Directory" "extraeuropea" "musica/extraeuropea")
+        ("Directory" "tradicional" "musica/tradicional")
+        ("Directory" "cantautores" "musica/cantautores")
 
-;; ;; no entiendo por qué funciona esto... por qué se unen con or y no con and?
-;; (emms-browser-make-filter "clasica-not-played"
-;;                           (lambda (track)
-;;                             (or
-;;                              (funcall (emms-browser-filter-only-dir "~/musica/clasica") track)
-;;                                  (not (funcall (emms-browser-filter-only-recent 30) track)))))
+        ("Genre" "Barroco"    "Barroco")
+        ("Genre" "Early music"    "Early Music")
+        ("Genre" "Opera"    "opera")
+        ("Artist" "mozart"    "Mozart")
 
-;; ;;; esto es un misterio: no sé por qué hay que negar con not
-;; ;;; pero sin el not escoge todos los que no son clasica/opera
-;; (emms-browser-make-filter "clasica-total"
-;;   (lambda (track)
-;;     (let ((directory (file-name-directory (emms-track-name track))))
-;;       (not
-;;        (or (string-prefix-p (expand-file-name "~/musica/clasica") directory)
-;;            (string-prefix-p (expand-file-name "~/musica/renacimiento") directory)
-;;            (string-prefix-p (expand-file-name "~/musica/opera") directory))))))
+        ("Multi-filter"
+         "Barroco | Early Music"
+         (("Barroco" "Early music")))
 
-;; (emms-browser-make-filter "opera"
-;;                           (emms-browser-filter-only-dir "~/musica/opera"))
-;; (emms-browser-make-filter "medieval"
-;;                           (emms-browser-filter-only-dir "~/musica/medieval"))
-;; (emms-browser-make-filter "renacimiento"
-;;                           (emms-browser-filter-only-dir "~/musica/renacimiento"))
-;; (emms-browser-make-filter "extraeuropea"
-;;                           (emms-browser-filter-only-dir "~/musica/extraeuropea"))
+        ("Multi-filter"
+         "mozart opera"
+         (("Opera") ("mozart")))
 
-;; (emms-browser-make-filter "last-month-not-played"
-;;    (lambda (track)
-;;      (not (funcall (emms-browser-filter-only-recent 30) track))))
+        ("Multi-filter"
+         "mozart (sin ópera)"
+         (("mozart") (:not "Opera"))) ;; funciona pero mal por tags!
 
-;; (emms-browser-make-filter "last-month-played"
-;;    (lambda (track)
-;;      (funcall (emms-browser-filter-only-recent 30) track)))
+        ("Multi-filter"
+         "clásica total"
+         (("clasica" "renacimiento")))
+        ))
 
-;; (emms-browser-make-filter "tradicional"
-;;                           (emms-browser-filter-only-dir "~/musica/tradicional"))
-
-;; (emms-browser-make-filter "pop"
-;;                           (emms-browser-filter-only-dir "~/musica/pop"))
-
-;; (emms-browser-make-filter "cantautores"
-;;                           (emms-browser-filter-only-dir "~/musica/cantautores"))
-
-;; ;;; esto es un misterio: no sé por qué hay que negar con not
-;; ;;; pero sin el not escoge todos los que no son clasica/opera
-;; (emms-browser-make-filter "chungui-total"
-;;   (lambda (track)
-;;     (let ((directory (file-name-directory (emms-track-name track))))
-;;       (not
-;;        (or (string-prefix-p (expand-file-name "~/musica/tradicional") directory)
-;;            (string-prefix-p (expand-file-name "~/musica/pop") directory)
-;;            (string-prefix-p (expand-file-name "~/musica/cantautores") directory))))))
-
-;; (emms-browser-make-filter "all" 'ignore)
-
-;; ;; Set "all" as the default filter
-;; (emms-browser-set-filter (assoc "all" emms-browser-filters))
-
-;; ;; Pequeña función para escoger los filtros; realmente según chatgpt
-;; ;; hay un sistema mejor porque es posible extraer de obarray los nombres
-;; ;; de los filtros, etc.
-;; (setq ism/--own-emms-filters
-;;       '("all" "clasica" "opera" "clasica-total" "chungui-total" "tradicional"
-;;         "extraeuropea" "last-month-not-played" "medieval" "renacimiento"
-;;         "last-month-played" "pop" "cantautores" "clasica-not-played"))
-
-;; (defun ism/emms-browser-run-filter ()
-;;   "Muestra una lista de filtros EMMS definidos (prefijo
-;; 'emms-browser-show-') y ejecuta el filtro seleccionado."
-;;   (interactive)
-;;   (let
-;;       ((selected-filter (completing-read "Selecciona un filtro EMMS: " ism/--own-emms-filters nil t)))
-;;     (funcall (intern (concat "emms-browser-show-" selected-filter)))))
+(emms-filters-make-filters general-filters)
+(remove-hook 'emms-filters-expand-render-hook 'emms-browser-expand-all)
+;;(emms-filters-make-filter-ring '("Barroco" "mozar opera"))
 
 ; esto es para emms
 (setq emms-lyrics-dir "~/.lyrics/")
@@ -140,7 +99,6 @@
                     ("C-c e z" . emms-toggle-repeat-track)
                     ("C-c e u" . emms-score-up-playing)
                     ("C-c e d" . emms-score-down-playing)
-                    ("C-c e f" . ism/emms-browser-run-filter)
                     ("C-c e C-r" . emms-toggle-repeat-playlist)
                     ("C-c e C-b" . emms-browser)
                     ("C-c e C-p" . emms-playlist-mode-go)))
@@ -152,7 +110,6 @@
                     ("SPC" . emms-pause)
                     ("S" . emms-stop)
                     ("z" . emms-toggle-repeat-track)
-                    ("f" . ism/emms-browser-run-filter)
                     ("j" . next-line)
                     ("k" . previous-line)
                     ("1" . emms-browse-by-artist)
