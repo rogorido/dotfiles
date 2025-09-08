@@ -93,5 +93,10 @@
   :hook
   (lsp-mode . lsp-ui-mode))
 
+;; should be in another place!
+;; https://docs.astral.sh/ruff/editors/setup/#via-third-party-plugin
+(require 'ruff-format)
+(add-hook 'python-mode-hook 'ruff-format-on-save-mode)
+
 (provide 'ism-lsp)
 ;;; ism-lsp.el ends here
