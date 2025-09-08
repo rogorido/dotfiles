@@ -49,7 +49,16 @@
         ("Genre" "Barroco"    "Barroco")
         ("Genre" "Early music"    "Early Music")
         ("Genre" "Opera"    "opera")
-        ("Artist" "mozart"    "Mozart")
+
+        ("Artist" "mozart"  "Mozart")
+        ("Artist" "Francesco Geminiani" "Geminiani")
+        ("Artist" "Francisco Tárrega" "Tárrega")
+        ("Artist" "Carlos Gardel" "Carlos Gardel")
+        ("Artist" "Johann Rosenmüller" "Johann Rosenmüller")
+        ("Artist" "John Dowland 1563-1626" "John Dowland")
+        ("Artist" "Luigi Boccherini" "Luigi Boccherini")
+        ("Artist" "Mateo Flecha, el Viejo" "Mateo Flecha, el Viejo")
+        ("Artist" "Roland de Lassus (1536-1593)" "Roland de Lassus")
 
         ("Multi-filter"
          "Barroco | Early Music"
@@ -70,7 +79,7 @@
 
 (emms-filters-make-filters general-filters)
 (remove-hook 'emms-filters-expand-render-hook 'emms-browser-expand-all)
-;;(emms-filters-make-filter-ring '("Barroco" "mozar opera"))
+(emms-filters-add-to-filter-menu-from-filter-list "Propios" general-filters)
 
 ; esto es para emms
 (setq emms-lyrics-dir "~/.lyrics/")
