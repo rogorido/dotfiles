@@ -31,6 +31,10 @@ xinput --set-prop 9 'libinput Accel Speed' 0.15
 
 # caps lock es nuestra ESc 
 # https://superuser.com/questions/566871/how-to-map-the-caps-lock-key-to-escape-key-in-arch-linux
-setxkbmap -option caps:escape
+#setxkbmap -option caps:escape
 # ssh digitalocean-postgresql -v -N -f -n
 
+# export variables in .env (for aider, etc.)
+set -a    # auto-export
+source "$HOME/.env"
+set +a
