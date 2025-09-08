@@ -36,7 +36,7 @@ _G_ gastos        _gr_ abrir georeligion     _tz_ zfassungen               _x_ b
 _ce_ .emacs       _gc_ capítulos             _tc_ cajones                  _kc_ chat ciencia      ^ ^
 _co_ config       _dr_ rezos                 _tk_ konferenzen              _kp_ chat programar    ^ ^                
 _K_ Kinder        _dg_ gobierno              _tC_ Cataluña                 _kl_ chat linux        ^ ^                
-_s_ sol           ^ ^                        _tl_ Lernenweb                ^ ^                    ^ ^                
+_s_ sol           ^ ^                        _tl_ Lernenweb                _kg_ chat general      ^ ^
 "
   ("b" hydra-buscar/body)
   ("ce" (find-file "~/.emacs"))
@@ -66,6 +66,7 @@ _s_ sol           ^ ^                        _tl_ Lernenweb                ^ ^  
   ("kc" (ism/switch-to-chat-science))
   ("kp" (ism/switch-to-chat-prog))
   ("kl" (ism/switch-to-chat-linux))
+  ("kg" (ism/switch-to-chat-general))
   ("x" ism/eliminar-buffers-molestos)
   ("acv" (org-agenda nil "cv"))
   ("acp" (org-agenda nil "cp"))
