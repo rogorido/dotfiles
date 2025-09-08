@@ -243,5 +243,12 @@
 
 (setq transient-show-common-commands t)
 
+(use-package calc
+  :defer t
+  :bind (:map calc-mode-map
+              ("%" . calc-percent) ;; it was mod what I do not use!
+              ))
+
+
 (provide 'ism-misc)
 ;;; ism-misc.el ends here
