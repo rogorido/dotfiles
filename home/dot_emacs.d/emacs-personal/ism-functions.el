@@ -726,6 +726,7 @@ emms-play-file."
 (ism/--switch-to-chat "linux")
 (ism/--switch-to-chat "science")
 (ism/--switch-to-chat "prog")
+(ism/--switch-to-chat "general")
 
 
 (provide 'ism-functions)
