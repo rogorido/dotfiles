@@ -25,6 +25,7 @@
 ;; When asked for emms-play-directory,
 ;; always start from this one
 (setq emms-source-file-default-directory "~/musica/")
+(emms-mode-line-mode -1)
 
 ;; Show the current track each time EMMS
 ;; starts to play a track with "NP : "
@@ -35,7 +36,7 @@
 ; es algo de buscar los directorios.
 (setq emms-source-file-directory-tree-function 'emms-source-file-directory-tree-find)
 
-(setq emms-filters-multi-filter-save-file "~/cojonesviudos.el")
+(setq emms-filters-multi-filter-save-file "~/.emacs.de/emmsfilters.el")
 
 (setq general-filters
       '(
