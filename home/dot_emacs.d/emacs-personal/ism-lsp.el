@@ -114,5 +114,9 @@
 (require 'ruff-format)
 (add-hook 'python-mode-hook 'ruff-format-on-save-mode)
 
+;; for eglot
+;; see https://github.com/minad/corfu/wiki#configuring-corfu-for-eglot
+(advice-add 'eglot-completion-at-point :around #'cape-wrap-buster)
+
 (provide 'ism-lsp)
 ;;; ism-lsp.el ends here
