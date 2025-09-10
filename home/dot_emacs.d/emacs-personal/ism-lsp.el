@@ -7,6 +7,9 @@
 ;; no use ninguno y luego le pongo yo a mano lo de company-capf.
 
 (use-package lsp-mode
+  :custom
+  (lsp-completion-provider :none) ;; we use Corfu!
+
   :init
   (setq lsp-keymap-prefix "s-l")
     ;; con esto hacemos que ponga muchos más colores en varaibles, etc.
@@ -16,8 +19,7 @@
   (setq lsp-prefer-flymake nil)
 
   (setq lsp-enable-file-watchers nil)
-  (setq lsp-completion-provider :none)
-
+  
   ;; pero sinceramente no sé por qué se deshabilita todo esto...
   ;; entiendo que lo que usa es el propio ccls a través de lsp pero no
   ;; me queda del todo claro...
@@ -25,7 +27,12 @@
                                              c/c++-cppcheck
                                              c/c++-gcc))
 
+  (defun my/lsp-mode-setup-completion ()
+    (setf (alist-get 'styles (alist-get 'lsp-capf completion-category-defaults))
+          '(orderless))) ;; Configure orderless
+  
   :hook (
+         (lsp-completion-mode . my/lsp-mode-setup-completion)
          (web-mode . lsp-deferred)
          (c-mode-common-mode . lsp-deferred)
          (c++-mode . lsp-deferred)
