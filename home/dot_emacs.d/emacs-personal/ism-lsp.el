@@ -27,6 +27,7 @@
                                              c/c++-cppcheck
                                              c/c++-gcc))
 
+  ;; see https://github.com/minad/corfu/wiki 
   (defun my/lsp-mode-setup-completion ()
     (setf (alist-get 'styles (alist-get 'lsp-capf completion-category-defaults))
           '(orderless))) ;; Configure orderless
@@ -38,14 +39,14 @@
          (c++-mode . lsp-deferred)
          (yaml-mode . lsp-deferred)
          (python-mode . lsp-deferred)
-;;         (js2-mode . lsp-deferred)
+         ;; (js2-mode . lsp-deferred)
          (js-mode . lsp-deferred)
          (typescript-mode . lsp-deferred)
          (lisp-mode . lsp-deferred)
          (php-mode . lsp-deferred)
          (vue-mode . lsp-deferred)
          (vue-ts-mode . lsp-deferred)
-;;         (emacs-lisp-mode . lsp-deferred)
+         ;; (emacs-lisp-mode . lsp-deferred)
          ;; if you want which-key integration
          (lsp-mode . lsp-enable-which-key-integration))
   :commands lsp lsp-deferred)
@@ -54,6 +55,14 @@
 ;; path to the `clients' subdirectory.
 ;; (add-to-list 'load-path (expand-file-name "lib/lsp-mode" user-emacs-directory))
 ;; (add-to-list 'load-path (expand-file-name "lib/lsp-mode/clients" user-emacs-directory))
+
+(use-package lsp-pyright
+  :ensure t
+  :custom (lsp-pyright-langserver-command "pyright") ;; or basedpyright
+  :hook (python-mode . (lambda ()
+                          (require 'lsp-pyright)
+                          (lsp))))  ; or lsp-deferred
+
 
 (use-package lsp-ui
   :custom
