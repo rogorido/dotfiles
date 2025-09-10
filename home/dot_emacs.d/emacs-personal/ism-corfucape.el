@@ -6,7 +6,7 @@
   :ensure t
   ;; Optional customizations
   :custom
-  ;; (corfu-cycle t)                ;; Enable cycling for `corfu-next/previous'
+  (corfu-cycle t)                ;; Enable cycling for `corfu-next/previous'
   (corfu-auto t) ;; Enable auto completion
   (corfu-auto-prefix 2) ;; Enable auto completion
   (corfu-auto-delay 0.15) ;; Enable auto completion
@@ -28,7 +28,11 @@
   ;; `global-corfu-modes' to exclude certain modes.
   :bind
   ;; Configure SPC for separator insertion
-  (:map corfu-map ("SPC" . corfu-insert-separator))
+  (:map corfu-map ("SPC" . corfu-insert-separator)
+        ("TAB" . corfu-next)
+        ([tab] . corfu-next)
+        ("S-TAB" . corfu-previous)
+        ([backtab] . corfu-previous))
   :init
   (global-corfu-mode))
 
