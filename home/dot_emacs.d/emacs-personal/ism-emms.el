@@ -1,7 +1,41 @@
 (message "Loading EMMS settings...")
 
-(require 'emms-setup)
-(emms-all)
+(require 'emms-player-mpv)
+(require 'emms-source-file) ;; probably not necessary...
+(require 'emms-source-playlist)
+(require 'emms-playlist-mode)
+(require 'emms-info-native) ;; info-mp3info, etc.?
+(require 'emms-cache)
+(require 'emms-mode-line)
+(require 'emms-mark)
+(require 'emms-show-all)
+(require 'emms-playing-time)
+;; (require 'emms-playlist-sort) ;; I do not sort the playlist... 
+(require 'emms-browser)
+;; (require 'emms-bookmarks) ;; do I need that?
+;; (require 'emms-score) ;; I do not use it, but maybe...
+(require 'emms-playlist-limit)
+(require 'emms-idapi-musicbrainz)
+
+;; loading all modules...
+;; (require 'emms-setup)
+;; (emms-all)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; some configs found in emms-all in emms-setup.el
+;;
+(setq emms-playlist-default-major-mode #'emms-playlist-mode)
+(add-to-list 'emms-track-initialize-functions #'emms-info-initialize-track)
+(setq emms-track-description-function #'emms-info-track-description)
+(when (fboundp 'emms-cache); work around compiler warning
+  (emms-cache 1))
+;; (emms-mode-line-mode 1)
+;; (emms-mode-line-blank)
+;; (emms-playing-time-mode 1)
+(add-hook 'emms-player-started-hook #'emms-last-played-update-current)
+(remove-hook 'emms-player-started-hook #'emms-lyrics-start)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 
 ;; Para actualizar el caché parece que lo mejor es hacer
 ;; C-u M-x emms-cache-sync
@@ -12,19 +46,10 @@
 (setq emms-player-list '(emms-player-mpv)
       emms-info-functions '(emms-info-native))
 
-;; mpd
-;; (require 'emms-player-mpd)
-;; (setq emms-player-mpd-server-name "localhost")
-;; (setq emms-player-mpd-server-port "6600")
-;; (add-to-list 'emms-info-functions 'emms-info-mpd)
-;; (setq  emms-player-list '(emms-player-mpd))
-
-;; (setq emms-player-mpd-music-directory "~/musica")
-;; (setq emms-player-mpd-sync-playlist nil)
-
 ;; When asked for emms-play-directory,
 ;; always start from this one
-(setq emms-source-file-default-directory "~/musica/")
+(setq emms-source-file-default-directory "~/musica/"
+      emms-source-playlist-default-format 'native)
 (emms-mode-line-mode -1)
 
 ;; Show the current track each time EMMS
@@ -36,7 +61,7 @@
 ; es algo de buscar los directorios.
 (setq emms-source-file-directory-tree-function 'emms-source-file-directory-tree-find)
 
-(setq emms-filters-multi-filter-save-file "~/.emacs.de/emmsfilters.el")
+(setq emms-filters-multi-filter-save-file "~/.emacs.d/emmsfilters.el")
 
 (setq general-filters
       '(
@@ -82,8 +107,8 @@
 (remove-hook 'emms-filters-expand-render-hook 'emms-browser-expand-all)
 (emms-filters-add-to-filter-menu-from-filter-list "Propios" general-filters)
 
-; esto es para emms
-(setq emms-lyrics-dir "~/.lyrics/")
+;; not used at the moment
+;; (setq emms-lyrics-dir "~/.lyrics/")
 
 ;; covers
 (setq emms-browser-covers #'emms-browser-cache-thumbnail-async)
