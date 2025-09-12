@@ -170,26 +170,15 @@
   (define-key emms-browser-mode-map (kbd (car key-func)) (cdr key-func)))
 
 ;; Keybindings for emms-playlist 
-(dolist (key-func '(("j" . #'next-line)
-                    ("k" . #'previous-line)
+(dolist (key-func '(("j" . next-line)
+                    ("k" . previous-line)
                     ("SPC" . emms-pause)
+                    ("z" . emms-toggle-repeat-track)
+                    ("e" . emms-smart-browse)
                     ))
   (define-key emms-playlist-mode-map (kbd (car key-func)) (cdr key-func)))
 
-
-
-;; Teclas en emms-playlist
-(define-key emms-playlist-mode-map "e" 'emms-smart-browse)
-(define-key emms-playlist-mode-map (kbd "SPC") #'emms-pause)
-(define-key emms-playlist-mode-map "z" 'emms-toggle-repeat-track)
-;; por qué no funciona esto?
-;;(define-key emms-playlist-mode-map "j" 'emms-playlist-next)
-
 (emms-history-load)
-
-;; (global-set-key (kbd "<kp-subtract>") 'emms-previous)
-;; (global-set-key (kbd "<kp-add>") 'emms-next)
-;; (global-set-key (kbd "<kp-multiply>") 'emms-random)
 
 ;;; muy simple
 ;; (setq emms-browser-info-year-format      "%i+ %n")
