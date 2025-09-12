@@ -131,6 +131,7 @@
                     ("C-c e p" . emms-pause)
                     ("C-c e s" . emms-stop)
                     ("C-c e n" . emms-next)
+                    ("C-c e g" . emms-metaplaylist-mode-go)
                     ("C-c e z" . emms-toggle-repeat-track)
                     ("C-c e u" . emms-score-up-playing)
                     ("C-c e d" . emms-score-down-playing)
@@ -157,13 +158,22 @@
                     ("L c" . emms-browser-lookup-composer-on-wikipedia) ;; era W C w 
                     ("L a" . emms-browser-lookup-artist-on-wikipedia) ;; era W C A
                     ("L A" . emms-browser-lookup-album-on-wikipedia) ;; era W C a
-                    ;;("b 2" . emms-browser-expand-to-level-2) ;; deshabilitamos: muy lento
-                    ;;("b 3" . emms-browser-expand-to-level-3) ;; deshabilitamos: muy lento
-                    ;;("b 4" . emms-browser-expand-to-level-4) ;; deshabilitamos: muy lento
+                    ;;("b 2" . emms-browser-expand-to-level-2) ;; too slow
+                    ;;("b 3" . emms-browser-expand-to-level-3) ;; too slow 
+                    ;;("b 4" . emms-browser-expand-to-level-4) ;; too slow
                     ("+" . emms-browser-next-filter)
                     ("-" . emms-browser-previous-filter)
                     ))
   (define-key emms-browser-mode-map (kbd (car key-func)) (cdr key-func)))
+
+;; Keybindings for emms-playlist 
+(dolist (key-func '(("j" . #'next-line)
+                    ("k" . #'previous-line)
+                    ("SPC" . emms-pause)
+                    ))
+  (define-key emms-playlist-mode-map (kbd (car key-func)) (cdr key-func)))
+
+
 
 ;; Teclas en emms-playlist
 (define-key emms-playlist-mode-map "e" 'emms-smart-browse)
