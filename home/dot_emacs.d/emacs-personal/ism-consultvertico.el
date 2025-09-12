@@ -245,7 +245,10 @@
   (setq completion-category-overrides
         '((file (styles . (basic partial-completion orderless)) (eager-display . t))
           (buffer (styles . (basic substring orderless)))
+          (project-file (styles . (orderless basic)))
+          (project-buffer (styles . (orderless basic)))
           (command (styles . (orderless basic)))
+          (variable (styles . (orderless basic)))
           (bookmark (styles . (basic substring)))
           (library (styles . (basic substring)))
           (embark-keybinding (styles . (basic substring)) (eager-display . t))
