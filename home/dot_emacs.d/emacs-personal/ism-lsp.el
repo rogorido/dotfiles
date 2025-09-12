@@ -30,7 +30,7 @@
   ;; see https://github.com/minad/corfu/wiki 
   (defun my/lsp-mode-setup-completion ()
     (setf (alist-get 'styles (alist-get 'lsp-capf completion-category-defaults))
-          '(orderless))) ;; Configure orderless
+          '(basic orderless))) ;; Configure orderless
   
   :hook (
          (lsp-completion-mode . my/lsp-mode-setup-completion)
