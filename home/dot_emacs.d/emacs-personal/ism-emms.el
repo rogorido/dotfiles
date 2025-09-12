@@ -16,6 +16,9 @@
 ;; (require 'emms-score) ;; I do not use it, but maybe...
 (require 'emms-playlist-limit)
 (require 'emms-idapi-musicbrainz)
+(require 'emms-metaplaylist-mode)
+(require 'emms-playlist-limit)
+(require 'emms-history)
 
 ;; loading all modules...
 ;; (require 'emms-setup)
@@ -182,6 +185,7 @@
 ;; por qué no funciona esto?
 ;;(define-key emms-playlist-mode-map "j" 'emms-playlist-next)
 
+(emms-history-load)
 
 ;; (global-set-key (kbd "<kp-subtract>") 'emms-previous)
 ;; (global-set-key (kbd "<kp-add>") 'emms-next)
