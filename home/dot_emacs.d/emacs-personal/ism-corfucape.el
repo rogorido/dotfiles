@@ -62,7 +62,7 @@
   )
 
 (setq cape-dict-file "/home/igor/.dict"
-      cape-dict-limit 30)
+      cape-dict-limit 10)
 
 ;; esto tal vez sea un poco agresivo, pero es que no encuentro la forma
 ;; de decirle que busque solo en algunos modes. Encima el lio es total
