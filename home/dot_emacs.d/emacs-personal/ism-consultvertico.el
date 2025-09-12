@@ -183,12 +183,76 @@
 
   ;; Emacs 28: Hide commands in M-x which do not work in the current mode.
   ;; Vertico commands are hidden in normal buffers.
-  ;; (setq read-extended-command-predicate
-  ;;       #'command-completion-default-include-p)
+  (setq read-extended-command-predicate
+        #'command-completion-default-include-p)
 
   ;; Enable recursive minibuffers
   (setq enable-recursive-minibuffers t))
 
+;;; General minibuffer settings
+;;; ideas taken from Proto (https://protesilaos.com/emacs/dotemacs)
+(use-package minibuffer
+  :ensure nil
+  :config
+;;;; Completion styles
+  ;; (setq completion-styles '(basic substring initials flex orderless)) ;; settings from Proto
+  (setq completion-styles '(basic)) ; also see `completion-category-overrides'
+  (setq completion-pcm-leading-wildcard t)) ; Emacs 31: make `partial-completion' behave like `substring'
+
+;;;; Completion category overrides
+(use-package minibuffer
+  :ensure nil
+  :config
+  ;; Reset all the per-category defaults so that (i) we use the
+  ;; standard `completion-styles' and (ii) can specify our own styles
+  ;; in the `completion-category-overrides' without having to
+  ;; explicitly override everything.
+  (setq completion-category-defaults nil)
+
+  ;; A non-exhaustve list of known completion categories:
+  ;;
+  ;; - `bookmark'
+  ;; - `buffer'
+  ;; - `charset'
+  ;; - `coding-system'
+  ;; - `color'
+  ;; - `command' (e.g. `M-x')
+  ;; - `customize-group'
+  ;; - `environment-variable'
+  ;; - `expression'
+  ;; - `face'
+  ;; - `file'
+  ;; - `function' (the `describe-function' command bound to `C-h f')
+  ;; - `info-menu'
+  ;; - `imenu'
+  ;; - `input-method'
+  ;; - `kill-ring'
+  ;; - `library'
+  ;; - `minor-mode'
+  ;; - `multi-category'
+  ;; - `package'
+  ;; - `project-buffer'
+  ;; - `project-file'
+  ;; - `symbol' (the `describe-symbol' command bound to `C-h o')
+  ;; - `theme'
+  ;; - `unicode-name' (the `insert-char' command bound to `C-x 8 RET')
+  ;; - `variable' (the `describe-variable' command bound to `C-h v')
+  ;; - `consult-grep'
+  ;; - `consult-isearch'
+  ;; - `consult-kmacro'
+  ;; - `consult-location'
+  ;; - `embark-keybinding'
+  (setq completion-category-overrides
+        '((file (styles . (basic partial-completion orderless)) (eager-display . t))
+          (buffer (styles . (basic substring orderless)))
+          (command (styles . (orderless basic)))
+          (bookmark (styles . (basic substring)))
+          (library (styles . (basic substring)))
+          (embark-keybinding (styles . (basic substring)) (eager-display . t))
+          (imenu (styles . (basic substring orderless)) (eager-display . t))
+          (consult-location (styles . (basic substring orderless)) (eager-display . t))
+          (kill-ring (styles . (emacs22 orderless)) (eager-display . t))
+          (eglot (styles . (emacs22 substring orderless))))))
 
 (use-package orderless
   :ensure t
