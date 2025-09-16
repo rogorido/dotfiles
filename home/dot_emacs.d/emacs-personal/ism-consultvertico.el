@@ -196,7 +196,7 @@
   :config
 ;;;; Completion styles
   ;; (setq completion-styles '(basic substring initials flex orderless)) ;; settings from Proto
-  (setq completion-styles '(basic)) ; also see `completion-category-overrides'
+  (setq completion-styles '(basic orderless)) ; also see `completion-category-overrides'
   (setq completion-pcm-leading-wildcard t)) ; Emacs 31: make `partial-completion' behave like `substring'
 
 ;;;; Completion category overrides
@@ -245,11 +245,13 @@
   (setq completion-category-overrides
         '((file (styles . (basic partial-completion orderless)) (eager-display . t))
           (buffer (styles . (basic substring orderless)))
+          (consult-multi (styles . (orderless basic)))
+          (consult-buffer (styles . (orderless basic)))
           (project-file (styles . (orderless basic)))
           (project-buffer (styles . (orderless basic)))
           (command (styles . (orderless basic)))
           (variable (styles . (orderless basic)))
-          (bookmark (styles . (basic substring)))
+          (bookmark (styles . (orderless basic substring)))
           (library (styles . (basic substring)))
           (embark-keybinding (styles . (basic substring)) (eager-display . t))
           (imenu (styles . (basic substring orderless)) (eager-display . t))
