@@ -18,11 +18,6 @@
   ;; (corfu-on-exact-match nil)     ;; Configure handling of exact matches
   ;; (corfu-scroll-margin 5)        ;; Use scroll margin
 
-  ;; Enable Corfu only for certain modes.
-  ;; :hook ((prog-mode . corfu-mode)
-  ;;        (shell-mode . corfu-mode)
-  ;;        (eshell-mode . corfu-mode))
-
   ;; Recommended: Enable Corfu globally.  This is recommended since Dabbrev can
   ;; be used globally (M-/).  See also the customization variable
   ;; `global-corfu-modes' to exclude certain modes.
@@ -34,8 +29,14 @@
         ("S-TAB" . corfu-previous)
         ([backtab] . corfu-previous))
   :init
-  (global-corfu-mode))
+    (defun ism/--corfu-basic-styles () ;; see https://github.com/minad/corfu
+      (setq-local completion-styles '(basic)
+                  completion-category-overrides nil
+                  completion-category-defaults nil))
 
+    (global-corfu-mode)
+  :hook ((corfu-mode . ism/--corfu-basic-styles))
+  )
 
 (use-package cape
   :ensure t
@@ -56,9 +57,8 @@
 
   ;; atención: me parece que es mejor poner el orden inverso porque realmente hace un push
   ;; y por tanto casí me aparece lo del dict como primera opción.
-  (add-hook 'completion-at-point-functions #'cape-dabbrev)
   (add-hook 'completion-at-point-functions #'cape-dict)
-
+  (add-hook 'completion-at-point-functions #'cape-dabbrev)
   )
 
 (setq cape-dict-file "/home/igor/.dict"
