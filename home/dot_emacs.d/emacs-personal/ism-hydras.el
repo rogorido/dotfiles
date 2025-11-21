@@ -37,6 +37,7 @@ _ce_ .emacs       _gc_ capítulos             _tc_ cajones                  _kc_
 _co_ config       _dr_ rezos                 _tk_ konferenzen              _kp_ chat programar    ^ ^                
 _K_ Kinder        _dg_ gobierno              _tC_ Cataluña                 _kl_ chat linux        ^ ^                
 _s_ sol           ^ ^                        _tl_ Lernenweb                _kg_ chat general      ^ ^
+^ ^               ^ ^                        _tb_ Berlín                   ^ ^                    ^ ^
 "
   ("b" hydra-buscar/body)
   ("ce" (find-file "~/.emacs"))
@@ -62,6 +63,7 @@ _s_ sol           ^ ^                        _tl_ Lernenweb                _kg_ 
   ("tf" ism/fichar-en-tarea)
   ("tz" ism/abrir-ficheros-zusammenfassungen)
   ("tc" ism/abrir-cajones)
+  ("tb" (project-switch-project "~/geschichte/projekte/maxplanckberlin"))
   ("tC" (tab-bar-select-tab 2))
   ("kc" (ism/switch-to-chat-science))
   ("kp" (ism/switch-to-chat-prog))
