@@ -414,10 +414,10 @@ awful.screen.connect_for_each_screen(function(s)
 		--valign = 'bottom',
 		widget = wibox.widget.textbox,
 	})
-	vicious.register(s.personalwidget, vicious.widgets.mdir, function(widget, args)
-		local label = "<span color='#A40000'> </span>" .. args[1] .. markup("#333333", "|")
-		return label
-	end, 120, { "/home/igor/Mail/inbox" })
+	-- vicious.register(s.personalwidget, vicious.widgets.mdir, function(widget, args)
+        --		local label = "<span color='#A40000'> </span>" .. args[1] .. markup("#333333", "|")
+        --		return label
+	-- end, 120, { "/home/igor/Mail/inbox" })
 
 	-- UVA
 	s.uva = wibox.widget({
@@ -425,10 +425,10 @@ awful.screen.connect_for_each_screen(function(s)
 		--valign = 'bottom',
 		widget = wibox.widget.textbox,
 	})
-	vicious.register(s.uva, vicious.widgets.mdir, function(widget, args)
-		local label = args[1] .. markup("#333333", "|")
-		return label
-	end, 300, { "/home/igor/Mail/uva/INBOX" })
+	-- vicious.register(s.uva, vicious.widgets.mdir, function(widget, args)
+        --		local label = args[1] .. markup("#333333", "|")
+	--	return label
+	--end, 300, { "/home/igor/Mail/uva/INBOX" })
 
 	-- Georeligion
 	s.georeligion = wibox.widget({
@@ -436,10 +436,10 @@ awful.screen.connect_for_each_screen(function(s)
 		--valign = 'bottom',
 		widget = wibox.widget.textbox,
 	})
-	vicious.register(s.georeligion, vicious.widgets.mdir, function(widget, args)
-		local label = args[1]
-		return label
-	end, 6000, { "/home/igor/Mail/geo/INBOX" })
+	-- vicious.register(s.georeligion, vicious.widgets.mdir, function(widget, args)
+        --		local label = args[1]
+--		return label
+--	end, 6000, { "/home/igor/Mail/geo/INBOX" })
 
 	-- paquetes de arch
 	s.paqueteswidget = wibox.widget({
@@ -447,7 +447,7 @@ awful.screen.connect_for_each_screen(function(s)
 		--valign = 'bottom',
 		widget = wibox.widget.textbox,
 	})
-	vicious.register(s.paqueteswidget, vicious.widgets.pkg, '<span color="#A40000"></span> $1', 7200, "Arch")
+--	vicious.register(s.paqueteswidget, vicious.widgets.pkg, '<span color="#A40000"></span> $1', 7200, "Arch")
 
 	-- volumen
 	-- s.volumewidget = wibox.widget.textbox(valign='bottom')
@@ -456,20 +456,20 @@ awful.screen.connect_for_each_screen(function(s)
 		--valign = 'bottom',
 		widget = wibox.widget.textbox,
 	})
-	vicious.register(s.volumewidget, vicious.widgets.volume, function(widget, args)
-		local label = { ["♫"] = "O", ["♩"] = "M" }
+	--vicious.register(s.volumewidget, vicious.widgets.volume, function(widget, args)
+--		local label = { ["♫"] = "O", ["♩"] = "M" }
 		--local valor = '<span color="#A40000">⊜⊕⦿♫</span> ' .. args[1] .. '%'
-		local valor = '<span color="#A40000"></span> ' .. args[1] .. "% "
-		return valor
-	end, 6, "Master")
+--		local valor = '<span color="#A40000"></span> ' .. args[1] .. "% "
+--		return valor
+--	end, 6, "Master")
 	-- añadimos botones
-	s.volumewidget:buttons(awful.util.table.join(
-		awful.button({}, 1, function()
-			awful.util.spawn("pavucontrol")
-		end),
-		awful.button({}, 2, mute_volume)
-	)) -- Register assigned buttons
-	s.volumewidget:buttons(s.volumewidget:buttons())
+--	s.volumewidget:buttons(awful.util.table.join(
+--		awful.button({}, 1, function()
+--			awful.util.spawn("pavucontrol")
+--		end),
+--		awful.button({}, 2, mute_volume)
+--	)) -- Register assigned buttons
+--	s.volumewidget:buttons(s.volumewidget:buttons())
 
 	-- CPU widget
 	cpuwidget = wibox.widget.graph()
@@ -485,20 +485,20 @@ awful.screen.connect_for_each_screen(function(s)
 
 	--Network name widget.
 	wifiwidget = wibox.widget.textbox()
-	vicious.register(wifiwidget, vicious.widgets.wifi, function(widget, args)
-		local red
-		if args["{ssid}"] == "N/A" then
-			red = "-"
-		else
-			red = args["{ssid}"]
-		end
-		return string.format('<span color="#A40000"></span> %.8s', red)
-	end, 25, "wlp2s0")
+	-- vicious.register(wifiwidget, vicious.widgets.wifi, function(widget, args)
+	--	local red
+	--	if args["{ssid}"] == "N/A" then
+	--		red = "-"
+	--	else
+	--		red = args["{ssid}"]
+	--	end
+	--	return string.format('<span color="#A40000"></span> %.8s', red)
+	-- end, 25, "wlp2s0")
 	-- añadimos botones
-	wifiwidget:buttons(awful.util.table.join(awful.button({}, 1, function()
-		awful.util.spawn("nm-connection-editor")
-	end))) -- Register assigned buttons
-	wifiwidget:buttons(wifiwidget:buttons())
+	-- wifiwidget:buttons(awful.util.table.join(awful.button({}, 1, function()
+	--	awful.util.spawn("nm-connection-editor")
+	-- end))) -- Register assigned buttons
+	-- wifiwidget:buttons(wifiwidget:buttons())
 
 	--
 	-- local fsbar = wibox.widget {
@@ -569,22 +569,22 @@ awful.screen.connect_for_each_screen(function(s)
 			--s.nuevocheck,
 			--fsbar,
 			--fswidget,
-			wifiwidget,
+			-- wifiwidget,
 			bar_spr,
 			s.batwidget,
 			bar_spr,
-			s.paqueteswidget,
+			-- s.paqueteswidget,
 			bar_spr,
 			-- oviedowidget,
 			-- bar_spr,
 			-- s.personalwidget,
 			-- s.erfurtwidget,
 			-- s.uva,
-			s.georeligion,
+			-- s.georeligion,
 			bar_spr,
 			contratowidget,
 			-- bar_spr,
-			s.volumewidget,
+			--s.volumewidget,
 			cajonsistema,			--wibox.widget.systray(),
 			s.mylayoutbox,
 			mytextclock,
