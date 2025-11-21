@@ -71,7 +71,7 @@
 ;; Optional additional args
 ;; (setq sqlformat-args '("-s2" "-g")) ;;
 (setq sqlformat-args nil) ;;
-(add-hook 'sql-mode-hook 'sqlformat-on-save-mode)
+;;(add-hook 'sql-mode-hook 'sqlformat-on-save-mode)
 
 
 ;;
