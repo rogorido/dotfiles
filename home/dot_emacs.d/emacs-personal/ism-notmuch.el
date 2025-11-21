@@ -61,12 +61,12 @@
                 :query "tag:eui and date:4M.."
                 :sort-order newest-first
                 :key ,(kbd "e x"))
-        ( :name "felipeii (unread)"
-                :query "tag:felipeii and tag:unread"
+        ( :name "berlin (unread)"
+                :query "tag:berlin and tag:unread"
                 :sort-order newest-first
                 :key ,(kbd "f u"))
-        ( :name "eui (last 4 months)"
-                :query "tag:felipeii and date:4M.."
+        ( :name "berlin (last 4 months)"
+                :query "tag:berlin and date:4M.."
                 :sort-order newest-first
                 :key ,(kbd "f x"))
         ( :name "unread all"
