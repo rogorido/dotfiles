@@ -34,7 +34,12 @@
   (emms-cache 1))
 ;; (emms-mode-line-mode 1)
 ;; (emms-mode-line-blank)
-;; (emms-playing-time-mode 1)
+;; this is important! otherwise listenbrainz does not send the played track
+;; because it relies on the playing-time!
+(emms-playing-time-mode 1)
+;; but I do not want to see the playing time
+(emms-playing-time-disable-display) ;; obsolete!
+
 (add-hook 'emms-player-started-hook #'emms-last-played-update-current)
 (remove-hook 'emms-player-started-hook #'emms-lyrics-start)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
