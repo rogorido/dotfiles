@@ -1,53 +1,54 @@
 (message "Loading EMMS settings...")
 
-(require 'emms-player-mpv)
-(require 'emms-source-file) ;; probably not necessary...
-(require 'emms-source-playlist)
-(require 'emms-playlist-mode)
-(require 'emms-info-native) ;; info-mp3info, etc.?
-(require 'emms-cache)
-(require 'emms-mode-line)
-(require 'emms-mark)
-(require 'emms-show-all)
-(require 'emms-playing-time)
-;; (require 'emms-playlist-sort) ;; I do not sort the playlist... 
-(require 'emms-browser)
-;; (require 'emms-bookmarks) ;; do I need that?
-;; (require 'emms-score) ;; I do not use it, but maybe...
-(require 'emms-playlist-limit)
-(require 'emms-idapi-musicbrainz)
-(require 'emms-metaplaylist-mode)
-(require 'emms-playlist-limit)
-(require 'emms-history)
+;; important information for updating the database
+;; 1. emms-add-directory-tree
+;; 2. emms-cache-save
+;; 3. emms-cache-sync (and C-u M-x emms-cache-sync for updating also removed items!)
 
-;; loading all modules...
-;; (require 'emms-setup)
-;; (emms-all)
+(require 'emms-setup)
+(emms-all)
 
+(require 'ism-emms-ext)
+
+;; (require 'emms-player-mpv)
+;; (require 'emms-source-file) ;; probably not necessary...
+;; (require 'emms-source-playlist)
+;; (require 'emms-playlist-mode)
+;; (require 'emms-info-native) ;; info-mp3info, etc.?
+;; (require 'emms-cache)
+;; (require 'emms-mode-line)
+;; (require 'emms-mark)
+;; (require 'emms-show-all)
+;; (require 'emms-playing-time)
+;; ;; (require 'emms-playlist-sort) ;; I do not sort the playlist...
+;; (require 'emms-browser)
+;; ;; (require 'emms-bookmarks) ;; do I need that?
+;; ;; (require 'emms-score) ;; I do not use it, but maybe...
+;; (require 'emms-playlist-limit)
+;; (require 'emms-idapi-musicbrainz)
+;; (require 'emms-metaplaylist-mode)
+;; (require 'emms-playlist-limit)
+;; (require 'emms-history)
+
+;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; ;; some configs found in emms-all in emms-setup.el
+;; ;;
+;; (setq emms-playlist-default-major-mode #'emms-playlist-mode)
+;; (add-to-list 'emms-track-initialize-functions #'emms-info-initialize-track)
+;; (setq emms-track-description-function #'emms-info-track-description)
+;; (when (fboundp 'emms-cache); work around compiler warning
+;;   (emms-cache 1))
+;; ;; (emms-mode-line-mode 1)
+;; ;; (emms-mode-line-blank)
+;; ;; this is important! otherwise listenbrainz does not send the played track
+;; ;; because it relies on the playing-time!
+;; (emms-playing-time-mode 1)
+;; ;; but I do not want to see the playing time
+;; ;;(emms-playing-time-disable-display) ;; obsolete!
+
+;; (add-hook 'emms-player-started-hook #'emms-last-played-update-current)
+;; (remove-hook 'emms-player-started-hook #'emms-lyrics-start)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; some configs found in emms-all in emms-setup.el
-;;
-(setq emms-playlist-default-major-mode #'emms-playlist-mode)
-(add-to-list 'emms-track-initialize-functions #'emms-info-initialize-track)
-(setq emms-track-description-function #'emms-info-track-description)
-(when (fboundp 'emms-cache); work around compiler warning
-  (emms-cache 1))
-;; (emms-mode-line-mode 1)
-;; (emms-mode-line-blank)
-;; this is important! otherwise listenbrainz does not send the played track
-;; because it relies on the playing-time!
-(emms-playing-time-mode 1)
-;; but I do not want to see the playing time
-(emms-playing-time-disable-display) ;; obsolete!
-
-(add-hook 'emms-player-started-hook #'emms-last-played-update-current)
-(remove-hook 'emms-player-started-hook #'emms-lyrics-start)
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-
-;; Para actualizar el caché parece que lo mejor es hacer
-;; C-u M-x emms-cache-sync
-;; pues me conserva bien los datos...
 
 ;; he experimentado con emms-info-exiftool y va mucho más lento y no
 ;; parece que los resultados sean muy diferentes... 
@@ -57,7 +58,8 @@
 ;; When asked for emms-play-directory,
 ;; always start from this one
 (setq emms-source-file-default-directory "~/musica/"
-      emms-source-playlist-default-format 'native)
+      emms-source-playlist-default-format 'native
+      emms-playlist-mode-center-when-go t)
 (emms-mode-line-mode -1)
 
 ;; Show the current track each time EMMS
@@ -71,51 +73,22 @@
 
 (setq emms-filters-multi-filter-save-file "~/.emacs.d/emmsfilters.el")
 
-(setq general-filters
-      '(
-        ("Directory" "clasica" "musica/clasica")
-        ("Directory" "renacimiento" "musica/renacimiento")
-        ("Directory" "medieval" "musica/medieval")
-        ("Directory" "extraeuropea" "musica/extraeuropea")
-        ("Directory" "tradicional" "musica/tradicional")
-        ("Directory" "cantautores" "musica/cantautores")
-
-        ("Genre" "Barroco"    "Barroco")
-        ("Genre" "Early music"    "Early Music")
-        ("Genre" "Opera"    "opera")
-
-        ("Artist" "mozart"  "Mozart")
-        ("Artist" "Francesco Geminiani" "Geminiani")
-        ("Artist" "Francisco Tárrega" "Tárrega")
-        ("Artist" "Carlos Gardel" "Carlos Gardel")
-        ("Artist" "Johann Rosenmüller" "Johann Rosenmüller")
-        ("Artist" "John Dowland 1563-1626" "John Dowland")
-        ("Artist" "Luigi Boccherini" "Luigi Boccherini")
-        ("Artist" "Mateo Flecha, el Viejo" "Mateo Flecha, el Viejo")
-        ("Artist" "Roland de Lassus (1536-1593)" "Roland de Lassus")
-
-        ("Multi-filter"
-         "Barroco | Early Music"
-         (("Barroco" "Early music")))
-
-        ("Multi-filter"
-         "mozart opera"
-         (("Opera") ("mozart")))
-
-        ("Multi-filter"
-         "mozart (sin ópera)"
-         (("mozart") (:not "Opera"))) ;; funciona pero mal por tags!
-
-        ("Multi-filter"
-         "clásica total"
-         (("clasica" "renacimiento")))
-        ))
-
 (emms-filters-make-filters general-filters)
 (remove-hook 'emms-filters-expand-render-hook 'emms-browser-expand-all)
 (emms-filters-add-to-filter-menu-from-filter-list "Propios" general-filters)
 
-;; not used at the moment
+;; (defun emms-filters-make-filter-has-played ()
+;;  "Show only tracks that have been played."
+;;  #'(lambda (track)
+;;      (emms-track-get track 'last-played nil)))
+
+;; (emms-filters-register-filter-factory "Tocado"
+;;                          'emms-filters-make-filter-has-played
+;;                          '())
+
+(require 'emms-lyrics)
+(emms-lyrics 1)
+(add-hook 'emms-player-started-hook 'emms-lyrics-lrclib-get)
 ;; (setq emms-lyrics-dir "~/.lyrics/")
 
 ;; covers
@@ -128,6 +101,8 @@
 ;; (require 'emms-history)
 ;; (emms-history-load)
 (emms-cache-enable)
+
+(add-hook 'emms-playlist-mode-hook 'hl-line-mode)
 
 (require 'emms-listenbrainz-scrobbler)
 (emms-listenbrainz-scrobbler-enable)
@@ -148,7 +123,7 @@
                     ("C-c e C-p" . emms-playlist-mode-go)))
   (global-set-key (kbd (car key-func)) (cdr key-func)))
 
-;; Teclas en emms-browser
+;; Keybindings for emms-browser
 (dolist (key-func '(("e" . emms-smart-browse)
                     ("P" . emms-pause)
                     ("SPC" . emms-pause)
@@ -156,6 +131,7 @@
                     ("z" . emms-toggle-repeat-track)
                     ("j" . next-line)
                     ("k" . previous-line)
+                    ("N" . emms-playlist-new)
                     ("1" . emms-browse-by-artist)
                     ("2" . emms-browse-by-album)
                     ("3" . emms-browse-by-genre)
@@ -169,8 +145,8 @@
                     ;;("b 2" . emms-browser-expand-to-level-2) ;; too slow
                     ;;("b 3" . emms-browser-expand-to-level-3) ;; too slow 
                     ;;("b 4" . emms-browser-expand-to-level-4) ;; too slow
-                    ("+" . emms-browser-next-filter)
-                    ("-" . emms-browser-previous-filter)
+                    ;; ("+" . emms-browser-next-filter)
+                    ;; ("-" . emms-browser-previous-filter)
                     ))
   (define-key emms-browser-mode-map (kbd (car key-func)) (cdr key-func)))
 
@@ -180,26 +156,18 @@
                     ("SPC" . emms-pause)
                     ("z" . emms-toggle-repeat-track)
                     ("e" . emms-smart-browse)
+                    ("N" . emms-playlist-new)
                     ))
   (define-key emms-playlist-mode-map (kbd (car key-func)) (cdr key-func)))
 
-(emms-history-load)
+;; Keybindings for emms-browser
+(dolist (key-func '(("q" . kill-current-buffer)
+                    ("j" . next-line)
+                    ("k" . previous-line)
+                    ))
+  (define-key emms-metaplaylist-mode-map (kbd (car key-func)) (cdr key-func)))
 
-;;; muy simple
-;; (setq emms-browser-info-year-format      "%i+ %n")
-;; (setq emms-browser-info-genre-format     "%i+ %n")
-;; (setq emms-browser-info-performer-format "%i+ %n")
-;; (setq emms-browser-info-composer-format  "%i+ %n")
-;; (setq emms-browser-info-artist-format    "%i* %n")
-;; (setq emms-browser-info-album-format     "%i- %n")
-;; (setq emms-browser-info-title-format     "%i♪ %n")
-;; (setq emms-browser-playlist-info-year-format      "%i+ %n")
-;; (setq emms-browser-playlist-info-genre-format     "%i+ %n")
-;; (setq emms-browser-playlist-info-performer-format "%i+ %n")
-;; (setq emms-browser-playlist-info-composer-format  "%i+ %n")
-;; (setq emms-browser-playlist-info-artist-format    "%i* %n")
-;; (setq emms-browser-playlist-info-album-format     "%i- %n")
-;; (setq emms-browser-playlist-info-title-format     "%i♪ %n")
+(emms-history-load)
 
 ;; (setq alist-compositores '(("Antonio Vivaldi" . "1800-1900")
 ;;                            ("Jan Dismas Zelenka" . "1679-1745")
@@ -356,6 +324,29 @@
 ;; ;;               (message "Se agregaron %d tracks del compositor %s a %s"
 ;; ;;                        (length tracks-a-agregar) compositor (buffer-name playlist-buffer))))))))))
 
+
+;; https://sqrtminusone.xyz/posts/2021-09-07-emms/
+(defun my/emms-cleanup-urls ()
+  (interactive)
+  (let ((keys-to-delete '()))
+    (maphash (lambda (key value)
+               (when (eq (cdr (assoc 'type value)) 'url)
+                 (add-to-list 'keys-to-delete key)))
+             emms-cache-db)
+    (dolist (key keys-to-delete)
+      (remhash key emms-cache-db)))
+  (setq emms-cache-dirty t))
+
+(defun my/emms-cleanup-streams ()
+  (interactive)
+  (let ((keys-to-delete '()))
+    (maphash (lambda (key value)
+               (when (eq (cdr (assoc 'type value)) 'playlist)
+                 (add-to-list 'keys-to-delete key)))
+             emms-cache-db)
+    (dolist (key keys-to-delete)
+      (remhash key emms-cache-db)))
+  (setq emms-cache-dirty t))
 
 (provide 'ism-emms)
 ;;; ism-emms.el ends here
