@@ -1,6 +1,6 @@
 (message "Loading emms-ext...")
 
-(setq general-filters
+(setq ism/emms-general-filters
       '(
         ("Directory" "clasica" "musica/clasica")
         ("Directory" "renacimiento" "musica/renacimiento")
@@ -37,4 +37,6 @@
 
         ("Multi-filter"
          "clásica total"
-         (("clasica" "renacimiento")))
+         (("clasica" "renacimiento")))))
+
+(provide 'ism-emms-ext)

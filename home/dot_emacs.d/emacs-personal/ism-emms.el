@@ -73,9 +73,11 @@
 
 (setq emms-filters-multi-filter-save-file "~/.emacs.d/emmsfilters.el")
 
-(emms-filters-make-filters general-filters)
+;; My own filters in ism-emms-ext
+(emms-filters-make-filters ism/emms-general-filters)
 (remove-hook 'emms-filters-expand-render-hook 'emms-browser-expand-all)
-(emms-filters-add-to-filter-menu-from-filter-list "Propios" general-filters)
+(emms-filters-add-to-filter-menu-from-filter-list
+ "Propios" ism/emms-general-filters)
 
 ;; (defun emms-filters-make-filter-has-played ()
 ;;  "Show only tracks that have been played."
