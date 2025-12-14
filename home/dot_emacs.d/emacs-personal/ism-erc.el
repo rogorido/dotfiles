@@ -36,9 +36,8 @@
 (setq erc-track-use-faces nil)
 
 ;; no mostrar estos channels en el track
-(setq erc-track-exclude '("#emacs" "#emacs-es" "#org-mode" "#archlinux"
-			  "#awesome" "##esperanto" "#lua" "#ledger" "#taskwarrior"
-			  "#postgresql" "#wikidata" "##pydata/pandas"))
+(setq erc-track-exclude '("#org-mode" "#archlinux" "#awesome" "##esperanto"
+			   "#wikidata" ))
 
 (setq erc-prompt ">>")
 (setq erc-header-line-format nil); o ponerlo con "%t"
@@ -58,8 +57,8 @@
 
 ;; (add-to-list 'erc-modules 'notifications)
 (erc-autojoin-mode t)
-(setq erc-autojoin-channels-alist
-      '(("irc.libera.chat" "#emacs" "#archlinux")))
+ ;; (setq erc-autojoin-channels-alist
+ ;;      '(("irc.libera.chat" "#emacs" "#archlinux")))
 
 ;; (setq erc-autojoin-channels-alist
 ;;        '(("libera.chat"  '("#emacs" "#archlinux"))
@@ -188,6 +187,7 @@
 
 (setq erc-header-line-face-method 'erc-update-header-line-show-disconnected)
 
+;; why do I have this?
 (setq erc-prompt-for-password nil)
 (setq erc-prompt-for-nickserv-password nil)
 
