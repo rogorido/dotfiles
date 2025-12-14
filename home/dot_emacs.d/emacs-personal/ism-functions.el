@@ -280,6 +280,16 @@
   (erc :server "irc.libera.chat" :port 6667 :nick "rogorido" :full-name "Igor Sosa Mayor" )
 )
 
+(defun ism/arrancar-znc ()
+  "Start ERC connection to my ZNC server."
+  (interactive)
+  ;; I think it is important to use nick and user!
+  (erc-tls :server "znc.sosawergles.net" :port 1111
+           :nick "rogorido" :user "rogorido"
+           :full-name "Igor Sosa Mayor" )
+)
+
+
 (defun ism/enviar-link (titulo url)
   (interactive "sTitulo: \nsURL: ")
   (setq destinatario-lista (mapcar 'car contactos))
