@@ -100,8 +100,8 @@
 
 ;; realmente no quiero que me cargue todas las listas medio-temporales
 ;; que puedo crear...
-;; (require 'emms-history)
-;; (emms-history-load)
+(require 'emms-history)
+(emms-history-load)
 (emms-cache-enable)
 
 (add-hook 'emms-playlist-mode-hook 'hl-line-mode)
@@ -159,6 +159,8 @@
                     ("z" . emms-toggle-repeat-track)
                     ("e" . emms-smart-browse)
                     ("N" . emms-playlist-new)
+                    ("." . emms-seek-forward)
+                    ("," . emms-seek-backward)
                     ))
   (define-key emms-playlist-mode-map (kbd (car key-func)) (cdr key-func)))
 
@@ -169,7 +171,6 @@
                     ))
   (define-key emms-metaplaylist-mode-map (kbd (car key-func)) (cdr key-func)))
 
-(emms-history-load)
 
 ;; (setq alist-compositores '(("Antonio Vivaldi" . "1800-1900")
 ;;                            ("Jan Dismas Zelenka" . "1679-1745")
