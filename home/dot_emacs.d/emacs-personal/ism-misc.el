@@ -145,7 +145,7 @@
   (setq find-program "fd"))
 
 ;; me molesta que "n" abra el buffer donde está el "error" con rg...
-;; intercambiamos las teclas 
+;; intercambiamos las teclas
 (require 'rg)
 (define-key rg-mode-map (kbd "n") 'compilation-next-error)
 (define-key rg-mode-map (kbd "p") 'compilation-previous-error)
@@ -169,13 +169,17 @@
 ;; position is the last line. Above settings provides a margin of 3 or 4 lines
 ;; for my default window size for the "top" and "bottom" iterations.
 
-(setq mastodon-instance-url "https://fedihum.org"
-      mastodon-active-user "rogorido")
-
 (use-package mastodon
   :ensure t
   :config
   (mastodon-discover))
+
+(setq mastodon-instance-url "https://fedihum.org"
+      mastodon-active-user "rogorido")
+
+(add-hook 'mastodon-toot-mode-hook
+          (lambda ()
+            (auto-fill-mode -1)))
 
 (add-hook 'prog-mode-hook #'hl-line-mode)
 (set-face-background hl-line-face "gray23")
