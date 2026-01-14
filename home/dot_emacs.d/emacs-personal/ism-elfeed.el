@@ -4,6 +4,14 @@
   :ensure t
   :bind
   (:map elfeed-search-mode-map
+        ("j" . next-line)
+        ("k" . previous-line)
+        ("SPC" . elfeed-search-show-entry)
+        ("1" . elfeed-read-hsoz-job)
+        ("2" . elfeed-read-hsoz-rez)
+        ("3" . elfeed-read-hsoz-tagber)
+        ("4" . elfeed-read-hsoz-sonst)
+        ;; ("2" . elfeed-read-xataka)
         ("/ m" . ism/musica)
         ("/ g" . ism/geopolitik)
         ("/ h" . ism/history)
@@ -18,20 +26,60 @@
         ("m" . bard/add-video-emms-queue))
         ;; ("m" . mi-multimedia-url-emms))
   :config
+  (setq elfeed-search-filter "@1-months-ago +unread")
   (defun my/elfeed-search-filter-source (entry)
-  "Filter elfeed search buffer by the feed under cursor."
-  (interactive (list (elfeed-search-selected :ignore-region)))
-  (when (elfeed-entry-p entry)
-    (elfeed-search-set-filter
-     (concat
-      "@6-months-ago "
-      "+unread "
-      "="
-      (replace-regexp-in-string
-       (rx "?" (* not-newline) eos)
-       ""
-       (elfeed-feed-url (elfeed-entry-feed entry)))))))
+    "Filter elfeed search buffer by the feed under cursor."
+    (interactive (list (elfeed-search-selected :ignore-region)))
+    (when (elfeed-entry-p entry)
+      (elfeed-search-set-filter
+       (concat
+        "@6-months-ago "
+        "+unread "
+        "="
+        (replace-regexp-in-string
+         (rx "?" (* not-newline) eos)
+         ""
+         (elfeed-feed-url (elfeed-entry-feed entry)))))))
 
+   (defun elfeed--read-tag (filter tag)
+    "Template for filtering various feed categories.
+
+       FILTER is the filter string to apply, and TAG is a short name of
+       the displayed category.
+
+       The cursor is moved to the beginning of the first feed line."
+    (setq elfeed-search-filter filter)
+    (elfeed-search-update :force)
+    ;;(goto-char (point-min))
+   ;; (beginend-elfeed-search-mode-goto-beginning)
+    (message (concat "elfeed: show " tag)))
+   
+  (defun elfeed-read-xataka ()
+    "Show global news articles"
+    (interactive)
+    ;; (elfeed--remove-sports)
+    (elfeed--read-tag "@1-month-ago +unread =Xataka " "Xataka"))
+
+  (defun elfeed-read-hsoz-job ()
+    "Show HSOZ-KULT Jobs."
+    (interactive)
+    (elfeed--read-tag   "@6-months-ago +unread =HSozKult Job:\\\|Stip: " "HSoz-Kult Jobs"))
+
+  (defun elfeed-read-hsoz-rez ()
+    "Show HSOZ-KULT Rezensionen."
+    (interactive)
+    (elfeed--read-tag   "@6-months-ago +unread =HSozKult Rez: " "HSoz-Kult Rezensionen"))
+
+    (defun elfeed-read-hsoz-tagber ()
+    "Show HSOZ-KULT Tagungsbericht."
+    (interactive)
+    (elfeed--read-tag   "@6-months-ago +unread =HSozKult Tagber: " "HSoz-Kult Tagungsberichte."))
+
+    (defun elfeed-read-hsoz-sonst ()
+      "Show HSOZ-KULT other feeds."
+      (interactive)
+      (elfeed--read-tag   "@6-months-ago +unread =HSozKult !Tagber\\\|Job\\\|Stip\\\|Rez: " "HSoz-Kult Sonst."))
+    
   ;; https://www.bardman.dev/technology/elfeed
   (defun bard/add-video-emms-queue ()
     "Play the URL of the entry at point in mpv if it's a YouTube video. Add it to EMMS queue."
@@ -85,6 +133,7 @@
   (defun ism/history ()
     (interactive)
     (elfeed-search-set-filter "@6-months-ago +unread +history"))
+  
   )
 
 
@@ -128,6 +177,10 @@
       '((group (:title . "GitHub")
                (:elements
                 (query . (url . "SqrtMinusOne.private.atom"))
+                (group . ((:title . "Revistas")
+                          (:elements
+                           (query . (and technik)))
+                          (:hide t)))
                 (group . ((:title . "Guix packages")
                           (:elements
                            (query . (and github guix_packages)))
@@ -140,16 +193,29 @@
                         (query . (and blogs people emacs))))))
         (group (:title . "Politik")
                (:elements (search
-                           (:filter . "@6-months-ago +politik")
-                           (:title . "Alle"))
-                          (search
                            (:filter . "@6-months-ago =Heinrich-Böll-Stiftung")
                            (:title . "Heinrich-Böll-Stiftung"))))
+        (group (:title . "GeoPolitik")
+               (:elements (search
+                           (:filter . "@6-months-ago =Descrifrando")
+                           (:title . "Descrifrando la Guerra"))
+                          (search
+                           (:filter . "@6-months-ago =IRIS")
+                           (:title . "IRIS"))
+                          (search
+                           (:filter . "@6-months-ago =Eastern")
+                           (:title . "Center for Eastern Studies"))
+                          (search
+                           (:filter . "@6-months-ago =Exterior")
+                           (:title . "Política Exterior"))
+                          (search
+                           (:filter . "@6-months-ago =NaherOsten")
+                           (:title . "Naher Osten"))
+                          (search
+                           (:filter . "@6-months-ago =VisualPolitik")
+                           (:title . "VisualPolitik"))))
         (group (:title . "Economía")
                (:elements (search
-                           (:filter . "@6-months-ago +economia")
-                           (:title . "Alle"))
-                          (search
                            (:filter . "@12-months-ago +economia =Gratis")
                            (:title . "Nada es gratis"))
                           (search
@@ -163,8 +229,21 @@
                            (:filter . "@6-months-ago =HSozKult Job:")
                            (:title . "Soz-Kult Job"))
                           (search
+                           (:filter . "@6-months-ago =HSozKult Tagber:")
+                           (:title . "Soz-Kult Tagber"))
+                          (search
+                           (:filter . "@6-months-ago =HSozKult CFP:")
+                           (:title . "Soz-Kult CFP"))
+                          (search
+                           (:filter . "@6-months-ago =HSozKult Zs:")
+                           (:title . "Soz-Kult Zeitschriften"))
+                          (search
                            (:filter . "@6-months-ago =HSozKult Rez:")
                            (:title . "Soz-Kult Rezensionen"))))
+        (group (:title . "Cultura")
+               (:elements (search
+                           (:filter . "@6-months-ago +musica")
+                           (:title . "Música"))))
         (group (:title . "Videos")
                (:elements
                 (group
@@ -181,6 +260,20 @@
                   (query . (and videos history))))
 
                 ))))
+
+;; https://github.com/jeetelongname/elfeed-goodies
+(require 'elfeed-goodies)
+(elfeed-goodies/setup)
+
+(setq elfeed-goodies/entry-pane-position 'bottom)
+
+(use-package elfeed-score
+  :ensure t
+  :config
+  (progn
+    (elfeed-score-enable)
+    (define-key elfeed-search-mode-map "=" elfeed-score-map)))
+
 
 (provide 'ism-elfeed)
 ;;; ism-elfeed.el ends here
