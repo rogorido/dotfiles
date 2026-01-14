@@ -456,20 +456,20 @@ awful.screen.connect_for_each_screen(function(s)
 		--valign = 'bottom',
 		widget = wibox.widget.textbox,
 	})
-	--vicious.register(s.volumewidget, vicious.widgets.volume, function(widget, args)
---		local label = { ["♫"] = "O", ["♩"] = "M" }
-		--local valor = '<span color="#A40000">⊜⊕⦿♫</span> ' .. args[1] .. '%'
---		local valor = '<span color="#A40000"></span> ' .. args[1] .. "% "
---		return valor
---	end, 6, "Master")
-	-- añadimos botones
---	s.volumewidget:buttons(awful.util.table.join(
---		awful.button({}, 1, function()
---			awful.util.spawn("pavucontrol")
---		end),
---		awful.button({}, 2, mute_volume)
---	)) -- Register assigned buttons
---	s.volumewidget:buttons(s.volumewidget:buttons())
+	vicious.register(s.volumewidget, vicious.widgets.volume, function(widget, args)
+		local label = { ["♫"] = "O", ["♩"] = "M" }
+		local valor = '<span color="#A40000">⊜⊕⦿♫</span> ' .. args[1] .. '%'
+		local valor = '<span color="#A40000"></span> ' .. args[1] .. "% "
+		return valor
+	end, 6, "Master")
+        -- añadimos botones
+	-- s.volumewidget:buttons(awful.util.table.join(
+	-- 	awful.button({}, 1, function()
+	-- 		awful.util.spawn("pavucontrol")
+	-- 	end),
+	-- 	awful.button({}, 2, mute_volume)
+	-- )) -- Register assigned buttons
+	-- s.volumewidget:buttons(s.volumewidget:buttons())
 
 	-- CPU widget
 	cpuwidget = wibox.widget.graph()
@@ -584,7 +584,7 @@ awful.screen.connect_for_each_screen(function(s)
 			bar_spr,
 			contratowidget,
 			-- bar_spr,
-			--s.volumewidget,
+			s.volumewidget,
 			cajonsistema,			--wibox.widget.systray(),
 			s.mylayoutbox,
 			mytextclock,
@@ -693,11 +693,11 @@ globalkeys = awful.util.table.join(
 		awful.util.spawn("amixer set Master toggle")
 	end),
 	awful.key({}, "KP_Subtract", function()
-		awful.util.spawn("amixer set Master 5%-")
+		awful.util.spawn("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-")
 	end),
 	-- awful.key({ }, "KP_Add", function() awful.util.spawn("amixer set Master 5%+") end),
 	awful.key({}, "KP_Insert", function()
-		awful.util.spawn("amixer set Master 5%+")
+		awful.util.spawn("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+")
 	end),
 
 	awful.key({ modkey }, "d", function()
