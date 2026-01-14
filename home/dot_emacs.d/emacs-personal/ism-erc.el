@@ -191,6 +191,7 @@
 (setq erc-prompt-for-password nil)
 (setq erc-prompt-for-nickserv-password nil)
 
+(erc-track-mode)
 
 (provide 'ism-erc)
 ;;; ism-erc.el ends here
